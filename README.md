@@ -1,7 +1,5 @@
 # Wedding-planer
 
-# Semester Project <!-- omit in toc -->
-
 - [Project Structure](#project-structure)
 - [My Project Links](#my-project-links)
   - [Semester Project](#semester-project)
