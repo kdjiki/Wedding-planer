@@ -1,7 +1,7 @@
 # Wedding-planer
 
 - [Project Structure](#project-structure)
-- [My Project Links](#my-project-links)
+- [Project Links](#my-project-links)
   - [Semester Project](#semester-project)
   - [Semester Assignments](#semester-assignments)
 - [Project Requirements](#project-requirements)
@@ -10,16 +10,16 @@
 
 ## Project Structure
 
-- **`/`**: The source code of your main project
-- **`/assignments`**: Results of your semester assignments
-- **`/docs`**: If using GitHub for documentation (e.g., your final report in Markdown format)
+- **`/`**: The source code of main project
+- **`/assignments`**: Results of semester assignments
+- **`/docs`**: Documentation (e.g., final report in Markdown format)
 
-## My Project Links
+## Project Links
 
 ### Semester Project
 
-- Link to your production version: [**Production Version**](URL_TO_PRODUCTION_VERSION) <!-- Replace with actual URL -->
-- Link to your final report: [**Final Report**](URL_TO_FINAL_REPORT) <!-- Replace with actual URL -->
+- Link to production version: [**Production Version**](URL_TO_PRODUCTION_VERSION) <!-- Replace with actual URL -->
+- Link to final report: [**Final Report**](URL_TO_FINAL_REPORT) <!-- Replace with actual URL -->
 <!-- Add more as necessary -->
 
 ### Semester Assignments
