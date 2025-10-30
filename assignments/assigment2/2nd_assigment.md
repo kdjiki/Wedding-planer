@@ -6,7 +6,7 @@
 
 ### **Petra Kovačević**
 
-(persona1.png)
+![Persona1](persona1.png)
 
 **Age:** 26  
 **Occupation:** Interior designer  
@@ -36,7 +36,7 @@
 
 ### **Marko Radić**
 
-(persona2.png)
+![Persona2](persona2.png)
 
 **Age:** 37  
 **Occupation:** Financial consultant  
@@ -66,7 +66,7 @@
 
 ### **Ivana Marušić**
 
-(persona3.png)
+![Persona3](persona3.png)
 
 **Age:** 33  
 **Occupation:** Wedding decorator & dove release service owner  
