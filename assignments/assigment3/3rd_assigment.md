@@ -16,7 +16,7 @@ All required objectives have been completed:
 ## 🌐 Deployment
 
 The project is publicly available at:  
-👉 **[https://food-loop-tau.vercel.app/](https://food-loop-tau.vercel.app/)**
+👉 **[https://wedding-planer-one.vercel.app/](https://wedding-planer-one.vercel.app/)**
 
 ---
 
