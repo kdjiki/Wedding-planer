@@ -34,20 +34,38 @@ The project is publicly available at:
 
 ```plaintext
 app/
- ├─ layout.tsx                # Root layout (HTML and body structure)
- ├─ page.tsx                  # Home page
- |─navigationData.ts          # Page definitions and route data
- ├─ wedding-service/
- │   ├─ layout.tsx            # Secondary layout for this section
- │   └─ page.tsx
- ├─ my-account/
- │   ├─ layout.tsx
- │   └─ page.tsx
- ├─ vendor-dashboard/
- │   └─ page.tsx
+ ├─ _components/
+ │   └─navigation.tsx              # Main navigation component
+ │
  ├─ inspiration/
- │   └─ page.tsx
- └─ _components/
-     └─navigation.tsx        # Navigation bar component
+ │   ├─ guides-tips-trends/         # Subpage for guides and trends
+ │   └─ ideas/                      # Subpage for inspiration ideas
+ │
+ ├─ login/
+ │
+ ├─ my-account/
+ │   ├─ budget-planner/             # Budget management section
+ │   ├─ my-bookings/                # Booked services overview
+ │   ├─ notes/                      # Notes and checklists
+ │   └─ profile/                    # User profile section
+ │
+ ├─ vendor-dashboard/
+ │   ├─ calendar/                   # Vendor calendar
+ │   ├─ manage-services/            # Service management
+ │   └─ reviews/                    # Client reviews
+ │
+ ├─ wedding-service/
+ │   ├─ bands-djs/                  # Music and entertainment
+ │   ├─ catering/                   # Catering options
+ │   ├─ other-services/             # Miscellaneous services
+ │   ├─ photographers/              # Photography services
+ │   └─ wedding-halls/              # Wedding venues
+ │
+ ├─ favicon.ico
+ |─navigationData.ts                # Page definitions and route data
+ ├─ globals.css                     # Global styling
+ ├─ layout.tsx                      # Root layout for the app
+ ├─ not-found.tsx                   # Custom 404 page
+ └─ page.tsx                        # Home page
 
 ```
