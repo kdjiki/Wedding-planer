@@ -1,5 +1,5 @@
-import { Navigation } from "../_components/navigation";
 import { vendorPages } from "../navigationData";
+import { SubNavigation } from "../_components/subnavigation";
 
 
 export default function VendorDashboardLayout({
@@ -9,7 +9,7 @@ export default function VendorDashboardLayout({
 }>) {
   return (
     <>
-        <Navigation pages={vendorPages} />
+        <SubNavigation pages={vendorPages} />
         {children}
     </>
   );
