@@ -1,4 +1,7 @@
-import { Facebook, Instagram, Mail } from "lucide-react"
+import { FaFacebookSquare } from "react-icons/fa"
+import { FaInstagram } from "react-icons/fa6";
+import { Mail } from "lucide-react"
+
 import "../globals.css"
 
 
@@ -57,13 +60,13 @@ export function Footer() {
                 href="#"
                 className="w-10 h-10 bg-gray-600 rounded-lg flex items-center justify-center hover:bg-[#FF69B4] transition-colors"
               >
-                <Facebook size={20} />
+                <FaFacebookSquare  size={20} />
               </a>
               <a
                 href="#"
                 className="w-10 h-10 bg-gray-600 rounded-lg flex items-center justify-center hover:bg-[#FF69B4] transition-colors"
               >
-                <Instagram size={20} />
+                <FaInstagram size={20} />
               </a>
             </div>
             <div className="flex gap-2">
