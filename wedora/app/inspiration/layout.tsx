@@ -1,6 +1,5 @@
-import { Navigation } from "../_components/navigation";
 import { inspirationPages } from "../navigationData";
-
+import { SubNavigation } from "../_components/subnavigation";
 
 export default function InspirationLayout({
   children,
@@ -9,7 +8,7 @@ export default function InspirationLayout({
 }>) {
   return (
     <>
-        <Navigation pages={inspirationPages} />
+        <SubNavigation pages={inspirationPages} />
         {children}
     </>
   );

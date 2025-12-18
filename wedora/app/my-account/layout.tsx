@@ -1,4 +1,4 @@
-import { Navigation } from "../_components/navigation";
+import { SubNavigation } from "../_components/subnavigation";
 import { myAccountPages } from "../navigationData";
 
 
@@ -9,7 +9,7 @@ export default function MyAccountLayout({
 }>) {
   return (
     <>
-        <Navigation pages={myAccountPages} />
+        <SubNavigation pages={myAccountPages} />
         {children}
     </>
   );

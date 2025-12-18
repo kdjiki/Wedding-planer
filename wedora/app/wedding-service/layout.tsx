@@ -1,6 +1,5 @@
-import { Navigation } from "../_components/navigation";
+import { SubNavigation } from "../_components/subnavigation";
 import { weddingServicePages } from "../navigationData";
-
 
 
 export default function WeddingServiceLayout({
@@ -10,7 +9,7 @@ export default function WeddingServiceLayout({
 }>) {
   return (
     <>
-        <Navigation pages={weddingServicePages} />
+        <SubNavigation pages={weddingServicePages} />
         {children}
     </>
   );

@@ -6,14 +6,12 @@ export type Page = {
 
 
 const mainPages: Page[] = [
-  { title: "Home", path: "/" },
+  { 
+    title: "Home",
+    path: "/" },
   {
     title: "Wedding service",
     path: "/wedding-service",
-  },
-  {
-    title: "My account",
-    path: "/my-account",
   },
   {
     title: "Vendor dashboard",
@@ -22,6 +20,10 @@ const mainPages: Page[] = [
   {
     title: "Inspiration",
     path: "/inspiration",
+  },
+{
+    title: "My account",
+    path: "/my-account",
   },
   {
     title: "Login",
