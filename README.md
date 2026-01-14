@@ -28,6 +28,8 @@
 - Link to Assignment 2: [**Assignment 2**](https://github.com/kdjiki/Wedding-planer/blob/main/assignments/assigment2/2nd_assigment.md) <!-- Replace with actual URL -->
 - Link to Assignment 3: [**Assignment 3**](https://github.com/kdjiki/Wedding-planer/blob/main/assignments/assigment3/3rd_assigment.md) <!-- Replace with actual URL -->
 - Link to Assignment 4: [**Assignment 4**](https://github.com/kdjiki/Wedding-planer/blob/main/assignments/assigment4/4th_assigment.md)
+- Link to Assignment 5: [**Assignment 5**](https://github.com/kdjiki/Wedding-planer/blob/main/assignments/assigment5/5th_assignment.md)
+
 <!-- Add more assignments as necessary -->
 
 ## Project Requirements
