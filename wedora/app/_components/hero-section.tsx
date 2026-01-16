@@ -11,20 +11,20 @@ export function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1A1A1A] dark:text-white mb-4 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1A1A1A] dark:text-white mb-4 leading-tight max-[410px]:text-justify max-[410px]:px-2">
               Plan Your Dream Wedding in One Place
             </h1>
-            <p className="text-lg text-[#666666] dark:text-[#B0B0B0] mb-8 leading-relaxed">
+            <p className="text-lg text-[#666666] dark:text-[#B0B0B0] mb-8 leading-relaxed max-[410px]:text-justify max-[410px]:px-2">
               Browse, compare, and book wedding venues, photographers, catering and more — all with real-time
               availability
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 mb-10">
-              <button className="px-8 py-3 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-all hover:shadow-lg font-medium">
+            <div className="flex flex-wrap gap-4 mb-10 lg:justify-start max-[410px]:flex-col max-[410px]:items-center">
+              <button className="px-8 py-3 bg-[#FF69B4]  text-white rounded-lg hover:bg-[#FF1493] transition-all hover:shadow-lg font-medium max-[410px]:w-full max-[410px]:max-w-[260px] cursor-pointer">
                 Explore Services
               </button>
-              <button className="px-8 py-3 bg-white dark:bg-[#1E1E1E] text-[#FF69B4] border-2 border-[#FF69B4] rounded-lg hover:bg-[#FFB6C1]/10 dark:hover:bg-[#FF69B4]/10 transition-all font-medium">
+              <button className="px-8 py-3 bg-white dark:bg-[#1E1E1E] text-[#FF69B4] border-2 border-[#FF69B4] rounded-lg hover:bg-[#FFB6C1]/10 dark:hover:bg-[#FF69B4]/10 transition-all font-medium max-[410px]:w-full max-[410px]:max-w-[260px] cursor-pointer">
                 How It Works
               </button>
             </div>
@@ -57,7 +57,7 @@ export function HeroSection() {
                   />
                 </div>
               </div>
-              <button className="w-full py-3 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium">
+              <button className="w-full py-3 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium cursor-pointer">
                 Search
               </button>
             </div>
@@ -65,7 +65,7 @@ export function HeroSection() {
 
           {/* Right Image */}
           <div className="relative">
-            <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl relative">
+            <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl relative max-[1024px]:hidden">
               <Image
                 src="/bride-holding-wedding-bouquet-with-soft-lighting.jpg"
                 alt="Bride with wedding bouquet"

@@ -34,7 +34,7 @@ export function Navigation({ pages }: { pages: Page[] }) {
                 {link.title}
               </Link>
             ))}
-            <button className="px-6 py-2 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium">
+            <button className="px-6 py-2 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium cursor-pointer">
               <a href="/login">
                 Login
               </a>

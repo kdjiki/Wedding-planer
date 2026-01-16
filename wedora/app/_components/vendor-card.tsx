@@ -46,7 +46,7 @@ export function VendorCard({
           <span className="text-sm text-[#666666] dark:text-[#B0B0B0]">({reviewCount} reviews)</span>
         </div>
         <p className="text-sm text-[#666666] dark:text-[#B0B0B0] mb-4">Starting at {startingPrice}</p>
-        <button className="w-full py-2 border-2 border-[#FF69B4] text-[#FF69B4] rounded-lg hover:bg-[#FF69B4] hover:text-white transition-colors font-medium">
+        <button className="w-full py-2 border-2 border-[#FF69B4] text-[#FF69B4] rounded-lg hover:bg-[#FF69B4] hover:text-white transition-colors font-medium cursor-pointer">
           View Details
         </button>
       </div>

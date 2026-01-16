@@ -73,7 +73,7 @@ export function Footer() {
                 placeholder="Your email"
                 className="flex-1 px-4 py-2 bg-gray-800 dark:bg-gray-900 rounded-lg text-sm outline-none focus:ring-2 focus:ring-[#FF69B4]"
               />
-              <button className="px-4 py-2 bg-[#FF69B4] rounded-lg hover:bg-[#FF1493] transition-colors">
+              <button className="px-4 py-2 bg-[#FF69B4] rounded-lg hover:bg-[#FF1493] transition-colors cursor-pointer">
                 <Mail size={18} />
               </button>
             </div>

@@ -59,7 +59,7 @@ export function FeaturedVendorsSection() {
         </div>
 
         <div className="text-center">
-          <button className="px-8 py-3 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium">
+          <button className="px-8 py-3 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium cursor-pointer">
             View All Vendors
           </button>
         </div>

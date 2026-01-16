@@ -7,7 +7,7 @@ export function CtaSection() {
           <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
             Join thousands of happy couples who planned their perfect day with Wedora
           </p>
-          <button className="px-10 py-4 bg-white text-[#FF69B4] rounded-lg hover:bg-gray-50 transition-all font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105">
+          <button className="px-10 py-4 bg-white text-[#FF69B4] rounded-lg hover:bg-gray-50 transition-all font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transform cursor-pointer">
             Get Started Free
           </button>
           <p className="text-white/80 text-sm mt-4">
