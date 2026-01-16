@@ -6,15 +6,15 @@ import Image from "next/image"
 
 export function HeroSection() {
   return (
-    <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#121212]">
+    <section  className="pt-18 pb-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#121212]">
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid min-[1075px]:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1A1A1A] dark:text-white mb-4 leading-tight max-[410px]:text-justify max-[410px]:px-2">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1A1A1A] dark:text-white mb-4 leading-tight max-[410px]:text-center max-[410px]:px-2">
               Plan Your Dream Wedding in One Place
             </h1>
-            <p className="text-lg text-[#666666] dark:text-[#B0B0B0] mb-8 leading-relaxed max-[410px]:text-justify max-[410px]:px-2">
+            <p className="text-lg text-[#666666] dark:text-[#B0B0B0] mb-2 leading-relaxed max-[410px]:text-justify max-[410px]:px-2">
               Browse, compare, and book wedding venues, photographers, catering and more — all with real-time
               availability
             </p>
@@ -65,7 +65,7 @@ export function HeroSection() {
 
           {/* Right Image */}
           <div className="relative">
-            <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl relative max-[1024px]:hidden">
+            <div className="aspect-[5/5] rounded-2xl overflow-hidden shadow-2xl relative max-[1075px]:hidden">
               <Image
                 src="/bride-holding-wedding-bouquet-with-soft-lighting.jpg"
                 alt="Bride with wedding bouquet"

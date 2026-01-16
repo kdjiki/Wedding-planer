@@ -19,7 +19,15 @@ export function TestimonialCard({ quote, name, weddingDate, image, rating }: Tes
       </div>
       <p className="text-[#1A1A1A] dark:text-white mb-6 leading-relaxed italic">&ldquo;{quote}&rdquo;</p>
       <div className="flex items-center gap-3">
-        <Image src={image || "/placeholder.svg"} alt={name} width={48} height={48} className="rounded-full object-cover" />
+        <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200">
+          <Image
+            src={image || "/placeholder.svg"}
+            alt={name}
+            width={48}
+            height={48}
+            className="w-full h-full object-cover"
+          />
+        </div>       
         <div>
           <p className="font-semibold text-[#1A1A1A] dark:text-white">{name}</p>
           <p className="text-sm text-[#666666] dark:text-[#B0B0B0]">Married {weddingDate}</p>

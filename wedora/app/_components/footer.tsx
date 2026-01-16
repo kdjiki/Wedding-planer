@@ -1,12 +1,12 @@
 import { FaFacebookSquare } from "react-icons/fa"
 import { FaInstagram } from "react-icons/fa6";
 import { Mail } from "lucide-react"
+
+import { quickLinks, support } from "../navigationData";
   
 
-export function Footer() {
-  const quickLinks = ["Browse Services", "How It Works", "Pricing", "Blog"]
-  const support = ["Help Center", "Contact Us", "FAQs", "Terms & Privacy"]
 
+export function Footer() {
   return (
     <footer className="bg-[#1A1A1A] dark:bg-[#0A0A0A] text-white py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto text-center md:text-left">
@@ -27,9 +27,9 @@ export function Footer() {
             <h3 className="font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-gray-400 hover:text-[#FF69B4] transition-colors text-sm">
-                    {link}
+                <li key={link.title}>
+                  <a href={link.path} className="text-gray-400 hover:text-[#FF69B4] transition-colors text-sm">
+                    {link.title}
                   </a>
                 </li>
               ))}
@@ -41,9 +41,9 @@ export function Footer() {
             <h3 className="font-bold mb-4">Support</h3>
             <ul className="space-y-2">
               {support.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-gray-400 hover:text-[#FF69B4] transition-colors text-sm">
-                    {link}
+                <li key={link.title}>
+                  <a href={link.path} className="text-gray-400 hover:text-[#FF69B4] transition-colors text-sm">
+                    {link.title}
                   </a>
                 </li>
               ))}
@@ -82,7 +82,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-gray-800 dark:border-gray-900 text-center text-gray-400 text-sm">
-          <p>&copy; 2025 Wedora. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Wedora. All rights reserved.</p>
         </div>
       </div>
     </footer>

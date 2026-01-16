@@ -5,39 +5,39 @@ export function ServicesSection() {
   const services = [
     {
       icon: Building2,
-      title: "Wedding Venues",
+      title: "Wedding Halls",
       description: "Find your perfect location",
-      href: "/services/venues",
+      href: "/wedding-service/wedding-halls",
     },
     {
       icon: Camera,
-      title: "Photography",
+      title: "Photographers",
       description: "Capture every precious moment",
-      href: "/services/photography",
+      href: "/wedding-service/photographers",
     },
     {
       icon: UtensilsCrossed,
       title: "Catering",
       description: "Delight your guests",
-      href: "/services/catering",
+      href: "/wedding-service/catering",
     },
     {
       icon: Music,
       title: "Music & Entertainment",
       description: "Set the perfect mood",
-      href: "/services/entertainment",
+      href: "/wedding-service/bands-djs",
     },
     {
       icon: Sparkles,
       title: "Decorations",
       description: "Create stunning ambiance",
-      href: "/services/decorations",
+      href: "/wedding-service/other-services",
     },
     {
       icon: ClipboardList,
       title: "Wedding Planning",
       description: "Professional guidance",
-      href: "/services/planning",
+      href: "/wedding-service/other-services",
     },
   ]
 
