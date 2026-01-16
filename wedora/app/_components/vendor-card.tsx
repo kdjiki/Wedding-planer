@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { Star } from "lucide-react"
 
 interface VendorCardProps {
@@ -22,10 +23,12 @@ export function VendorCard({
   return (
     <div className="bg-white dark:bg-[#1E1E1E] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all group cursor-pointer border border-[#E0E0E0] dark:border-[#2D2D2D] hover:border-[#FF69B4]">
       <div className="relative aspect-[4/3] overflow-hidden">
-        <img
+        <Image
           src={image || "/placeholder.svg"}
           alt={name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         {isNew && (
           <span className="absolute top-3 right-3 px-3 py-1 bg-[#FF69B4] text-white text-xs font-bold rounded-full">

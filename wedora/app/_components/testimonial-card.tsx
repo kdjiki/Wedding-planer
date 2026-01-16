@@ -17,7 +17,7 @@ export function TestimonialCard({ quote, name, weddingDate, image, rating }: Tes
           <Star key={i} size={20} className="fill-yellow-400 text-yellow-400" />
         ))}
       </div>
-      <p className="text-[#1A1A1A] dark:text-white mb-6 leading-relaxed italic">"{quote}"</p>
+      <p className="text-[#1A1A1A] dark:text-white mb-6 leading-relaxed italic">&ldquo;{quote}&rdquo;</p>
       <div className="flex items-center gap-3">
         <Image src={image || "/placeholder.svg"} alt={name} width={48} height={48} className="rounded-full object-cover" />
         <div>

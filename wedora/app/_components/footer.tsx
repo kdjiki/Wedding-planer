@@ -9,13 +9,13 @@ export function Footer() {
 
   return (
     <footer className="bg-[#1A1A1A] dark:bg-[#0A0A0A] text-white py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto text-center md:text-left">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Wedora Branding */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-4 justify-center md:justify-start">
               <div className="w-8 h-8 bg-[#FF69B4] rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">W</span>
+                <span className="text-white font-bold text-sm ">W</span>
               </div>
               <span className="font-bold text-xl">Wedora</span>
             </div>
@@ -53,21 +53,21 @@ export function Footer() {
           {/* Connect */}
           <div>
             <h3 className="font-bold mb-4">Connect</h3>
-            <div className="flex gap-4 mb-6">
+            <div className="flex gap-4 mb-6 justify-center md:justify-start">
               <a
                 href="#"
                 className="w-10 h-10 bg-gray-800 dark:bg-gray-900 rounded-lg flex items-center justify-center hover:bg-[#FF69B4] transition-colors"
               >
                 <FaFacebookSquare size={20} />
               </a>
-              <a
+              < a
                 href="#"
                 className="w-10 h-10 bg-gray-800 dark:bg-gray-900 rounded-lg flex items-center justify-center hover:bg-[#FF69B4] transition-colors"
               >
                 <FaInstagram size={20} />
               </a>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 justify-center md:justify-start px-8 sm:px-6 md:px-0">
               <input
                 type="email"
                 placeholder="Your email"
