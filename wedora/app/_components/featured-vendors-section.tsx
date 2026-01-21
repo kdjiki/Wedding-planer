@@ -60,7 +60,9 @@ export function FeaturedVendorsSection() {
 
         <div className="text-center">
           <button className="px-8 py-3 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium cursor-pointer">
-            View All Vendors
+            <a href="/wedding-service">
+              View All Vendors
+            </a>
           </button>
         </div>
       </div>

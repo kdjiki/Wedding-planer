@@ -22,6 +22,7 @@ export function VendorCard({
 }: VendorCardProps) {
   return (
     <div className="bg-white dark:bg-[#1E1E1E] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all group cursor-pointer border border-[#E0E0E0] dark:border-[#2D2D2D] hover:border-[#FF69B4]">
+      <a href="/wedding-service">
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={image || "/placeholder.svg"}
@@ -50,6 +51,7 @@ export function VendorCard({
           View Details
         </button>
       </div>
+      </a>
     </div>
   )
 }

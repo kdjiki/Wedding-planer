@@ -45,3 +45,14 @@ export const services = [
       href: "/wedding-service/other-services",
     }
   ]
+
+export const location = [
+    { id: "zagreb", name: "Zagreb" },
+    { id: "split", name: "Split" },
+    { id: "rijeka", name: "Rijeka" },
+    { id: "mostar", name: "Mostar" },
+    { id: "sarajevo", name: "Sarajevo" },
+    { id: "banja-luka", name: "Banja Luka" },
+    { id: "dubrovnik", name: "Dubrovnik" },
+    { id: "zadar", name: "Zadar" },
+  ]
