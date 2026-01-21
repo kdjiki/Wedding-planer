@@ -1,46 +1,9 @@
-import { Building2, Camera, UtensilsCrossed, Music, Sparkles, ClipboardList } from "lucide-react"
 import { ServiceCard } from "./service-card"
 
-export function ServicesSection() {
-  const services = [
-    {
-      icon: Building2,
-      title: "Wedding Halls",
-      description: "Find your perfect location",
-      href: "/wedding-service/wedding-halls",
-    },
-    {
-      icon: Camera,
-      title: "Photographers",
-      description: "Capture every precious moment",
-      href: "/wedding-service/photographers",
-    },
-    {
-      icon: UtensilsCrossed,
-      title: "Catering",
-      description: "Delight your guests",
-      href: "/wedding-service/catering",
-    },
-    {
-      icon: Music,
-      title: "Music & Entertainment",
-      description: "Set the perfect mood",
-      href: "/wedding-service/bands-djs",
-    },
-    {
-      icon: Sparkles,
-      title: "Decorations",
-      description: "Create stunning ambiance",
-      href: "/wedding-service/other-services",
-    },
-    {
-      icon: ClipboardList,
-      title: "Wedding Planning",
-      description: "Professional guidance",
-      href: "/wedding-service/other-services",
-    },
-  ]
+import { services } from "../servicesType"
 
+export function ServicesSection() {
+  
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#F5F5F5] dark:bg-[#1E1E1E]">
       <div className="max-w-7xl mx-auto">

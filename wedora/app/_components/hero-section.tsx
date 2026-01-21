@@ -1,10 +1,23 @@
 "use client"
 
-import { Calendar, MapPin, Search } from "lucide-react"
-
+import { Calendar, MapPin } from "lucide-react"
+import {Select, SelectSection, SelectItem} from "@heroui/select";
 import Image from "next/image"
+import { useMemo, useState } from "react"
+import { Selection } from "@react-types/shared"
+
+import {services} from "../servicesType"
 
 export function HeroSection() {
+  const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set([]));
+
+  const selectedValue = useMemo(() => {
+    const key = Array.from(selectedKeys)[0];
+    const service = services.find(s => s.id === key);
+    return service?.title;
+  }, [selectedKeys]);
+
+
   return (
     <section  className="pt-18 pb-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#121212]">
       <div className="max-w-7xl mx-auto">
@@ -22,24 +35,46 @@ export function HeroSection() {
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 mb-10 lg:justify-start max-[410px]:flex-col max-[410px]:items-center">
               <button className="px-8 py-3 bg-[#FF69B4]  text-white rounded-lg hover:bg-[#FF1493] transition-all hover:shadow-lg font-medium max-[410px]:w-full max-[410px]:max-w-[260px] cursor-pointer">
+                <a href="/wedding-service">
                 Explore Services
+                </a>
               </button>
               <button className="px-8 py-3 bg-white dark:bg-[#1E1E1E] text-[#FF69B4] border-2 border-[#FF69B4] rounded-lg hover:bg-[#FFB6C1]/10 dark:hover:bg-[#FF69B4]/10 transition-all font-medium max-[410px]:w-full max-[410px]:max-w-[260px] cursor-pointer">
-                How It Works
+                <a href="#how-it-works">
+                  How It Works
+                </a>
               </button>
             </div>
 
             {/* Search Bar */}
             <div className="bg-white dark:bg-[#1E1E1E] border-2 border-[#E0E0E0] dark:border-[#2D2D2D] rounded-xl p-4 shadow-lg">
               <div className="grid sm:grid-cols-3 gap-4 mb-4">
-                <div className="flex items-center gap-2 px-4 py-2 bg-[#F5F5F5] dark:bg-[#121212] rounded-lg">
-                  <Search size={20} className="text-[#666666] dark:text-[#B0B0B0]" />
-                  <input
-                    type="text"
+                <div className="flex items-center bg-[#F5F5F5] dark:bg-[#121212] rounded-lg">
+                  <Select
+                    selectedKeys={selectedKeys}
+                    onSelectionChange={setSelectedKeys}
+                    renderValue={() => selectedValue || "Service Type"}
                     placeholder="Service Type"
-                    className="bg-transparent outline-none w-full text-sm text-[#1A1A1A] dark:text-white placeholder:text-[#666666] dark:placeholder:text-[#B0B0B0]"
-                  />
+                    className="bg-transparent outline-none justify-start w-full text-sm text-[#1A1A1Ab8] dark:text-white placeholder:text-[#666666] dark:placeholder:text-[#B0B0B0]"
+                    classNames={{
+                      selectorIcon: "absolute right-3 top-1/2 -translate-y-1/2 text-[#666666] dark:text-[#B0B0B0]",
+                    }}
+                    >
+                    <SelectSection className="bg-[#F5F5F5] dark:bg-[#121212] rounded-lg">
+                    {services.map((service) => (
+                      
+                      <SelectItem key={service.id}  textValue={service.title} className="gap-2 px-2 py-1 hover:bg-[#E0E0E0] dark:hover:bg-[#2D2D2D] rounded-md flex ">
+                        <div className="flex items-center gap-2">
+                            {service.icon && <service.icon size={14} />}
+                            <span>{service.title}</span>
+                          </div>
+                        </SelectItem>
+                    ))}
+                    </SelectSection>
+
+                  </Select>
                 </div>
+
                 <div className="flex items-center gap-2 px-4 py-2 bg-[#F5F5F5] dark:bg-[#121212] rounded-lg">
                   <MapPin size={20} className="text-[#666666] dark:text-[#B0B0B0]" />
                   <input

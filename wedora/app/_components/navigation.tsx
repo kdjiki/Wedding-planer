@@ -42,7 +42,7 @@ export function Navigation({ pages }: { pages: Page[] }) {
           </div>
 
           {/* Mobile Menu Button */}
-          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 text-[#1A1A1A]">
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 text-[#1A1A1A] dark:text-white hover:text-[#FF1493] dark:hover:text-[#FFB6C1] transition-colors">
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -64,7 +64,9 @@ export function Navigation({ pages }: { pages: Page[] }) {
               </Link>
             ))}
             <button className="w-full px-6 py-2 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium">
-              Login
+              <a href="/login">
+                Login
+              </a>
             </button>
           </div>
         </div>
