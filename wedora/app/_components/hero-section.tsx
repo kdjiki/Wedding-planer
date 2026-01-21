@@ -122,8 +122,8 @@ export function HeroSection() {
                         popoverContent: "bg-[#F5F5F5] dark:bg-[#121212] border border-[#E0E0E0] dark:border-[#2D2D2D] rounded-xl shadow-lg",
                         calendar: "text-[#1A1A1A] dark:text-white",
                       }}
-                    />
-                </div> */}
+                    />*/}
+                </div>
               </div>
 
               <button className="w-full py-3 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium cursor-pointer">
