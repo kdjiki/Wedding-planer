@@ -5,13 +5,13 @@ import { Page } from "../navigationData"
 
 export function SubNavigation({ pages }: { pages: Page[] }) {
   return (
-    <div className="sticky top-16 z-40 bg-white flex">
+    <div className="sticky top-16 z-40 flex bg-background/90 backdrop-blur-sm border-b border-white/20">
       <div className="max-w-7xl mx-auto px-4 flex gap-6 h-12 items-center ">
         {pages.map((page) => (
           <Link
             key={page.path}
             href={page.path}
-            className="text-sm font-medium text-gray-700 hover:text-pink-500"
+            className="text-sm font-medium text-gray-700 hover:text-pink-500py-4 text-[#1A1A1A] dark:text-white hover:text-[#FF1493] dark:hover:text-[#FFB6C1] transition-colors text-center text-sm font-medium"
           >
             {page.title}
           </Link>
