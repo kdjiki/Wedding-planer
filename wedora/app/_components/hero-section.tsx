@@ -2,17 +2,17 @@
 
 import { MapPin } from "lucide-react"
 import {Select, SelectSection, SelectItem} from "@heroui/select";
-import {today, getLocalTimeZone} from "@internationalized/date";
-import { DatePicker } from "@heroui/date-picker";
 import Image from "next/image"
 import { useMemo, useState } from "react"
 import { Selection } from "@react-types/shared"
 
 import {services, location} from "../servicesType"
+import { DatePicker } from "./date-picker";  
 
 export function HeroSection() {
   const [selectedService, setSelectedService] = useState<Selection>(new Set([]));
   const [selectedLocation, setSelectedLocation] = useState<Selection>(new Set([]));
+  const [weddingDate, setWeddingDate] = useState<Date | null>(null);
 
   const selectedValue = useMemo(() => {
     const key = Array.from(selectedService)[0];
@@ -56,9 +56,9 @@ export function HeroSection() {
             </div>
 
             {/* Search Bar */}
-            <div className="bg-white dark:bg-[#1E1E1E] border-2 border-[#E0E0E0] dark:border-[#2D2D2D] rounded-xl p-4 shadow-lg">
+            <div className="bg-white dark:bg-[#1E1E1E] border-2 border-[#E0E0E0] dark:border-[#2D2D2D] rounded-xl p-4 shadow-lg ">
               <div className="grid sm:grid-cols-3 gap-4 mb-4">
-                <div className="flex items-center bg-[#F5F5F5] dark:bg-[#121212] rounded-lg ">
+                <div className="flex items-center bg-[#F5F5F5] dark:bg-[#121212] rounded-lg cursor-pointer">
                   <Select
                     selectedKeys={selectedService}
                     onSelectionChange={setSelectedService}
@@ -86,7 +86,7 @@ export function HeroSection() {
                 </div>
 
                  {/* Location Select */}
-                <div className="flex items-center justify-start gap-2 bg-[#F5F5F5] dark:bg-[#121212] rounded-lg">
+                <div className="flex items-center justify-start gap-2 bg-[#F5F5F5] dark:bg-[#121212] rounded-lg cursor-pointer">
                   <Select
                     selectedKeys={selectedLocation}
                     onSelectionChange={setSelectedLocation}
@@ -110,27 +110,17 @@ export function HeroSection() {
                 </div>
 
                 {/* Date Input */}
-                <div className="flex items-center gap-2 px-4 py-2 bg-[#F5F5F5] dark:bg-[#121212] rounded-lg">
-                  {/* <DatePicker
-                      aria-label="Wedding date"
-                      defaultValue={today(getLocalTimeZone())}
-                      minValue={today(getLocalTimeZone())}
-                      className="bg-transparent outline-none w-full text-sm text-[#1A1A1A] dark:text-white"
-                      classNames={{
-                        base: "w-full",
-                        inputWrapper: "bg-transparent",
-                        popoverContent: "bg-[#F5F5F5] dark:bg-[#121212] border border-[#E0E0E0] dark:border-[#2D2D2D] rounded-xl shadow-lg",
-                        calendar: "text-[#1A1A1A] dark:text-white",
-                      }}
-                    />*/}
-                </div>
+                <DatePicker
+                    value={weddingDate}
+                    onChange={setWeddingDate}
+                    placeholder="Wedding Date"
+                  />
               </div>
-
-              <button className="w-full py-3 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium cursor-pointer">
-                <a href="/wedding-service">
-                Search
-                </a>
-              </button>
+              <a href="/wedding-service">
+                <button className="w-full py-3 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium cursor-pointer">
+                  Search
+                </button>
+              </a>
             </div>
           </div>
 
