@@ -26,6 +26,14 @@ export function HeroSection() {
     return loc?.name;
   }, [selectedLocation]);
 
+  const activeFiltersCount =
+  (Array.from(selectedService).length > 0 ? 1 : 0) +
+  (Array.from(selectedLocation).length > 0 ? 1 : 0) +
+  (weddingDate ? 1 : 0);
+
+  const hasFilters = activeFiltersCount > 0;
+
+
 
   return (
     <section  className="pt-18 pb-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#121212]">
@@ -40,20 +48,6 @@ export function HeroSection() {
               Browse, compare, and book wedding venues, photographers, catering and more — all with real-time
               availability
             </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 mb-10 lg:justify-start max-[410px]:flex-col max-[410px]:items-center">
-              <button className="px-8 py-3 bg-[#FF69B4]  text-white rounded-lg hover:bg-[#FF1493] transition-all hover:shadow-lg font-medium max-[410px]:w-full max-[410px]:max-w-[260px] cursor-pointer">
-                <a href="/wedding-service">
-                Explore Services
-                </a>
-              </button>
-              <button className="px-8 py-3 bg-white dark:bg-[#1E1E1E] text-[#FF69B4] border-2 border-[#FF69B4] rounded-lg hover:bg-[#FFB6C1]/10 dark:hover:bg-[#FF69B4]/10 transition-all font-medium max-[410px]:w-full max-[410px]:max-w-[260px] cursor-pointer">
-                <a href="#how-it-works">
-                  How It Works
-                </a>
-              </button>
-            </div>
 
             {/* Search Bar */}
             <div className="bg-white dark:bg-[#1E1E1E] border-2 border-[#E0E0E0] dark:border-[#2D2D2D] rounded-xl p-4 shadow-lg ">
@@ -116,11 +110,29 @@ export function HeroSection() {
                     placeholder="Wedding Date"
                   />
               </div>
+
               <a href="/wedding-service">
-                <button className="w-full py-3 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium cursor-pointer">
-                  Search
+                <button
+                  className={`w-full py-3 rounded-lg transition-colors font-medium cursor-pointer
+                    ${hasFilters
+                      ? "bg-[#FF69B4] hover:bg-[#FF1493] text-white"
+                      : "bg-[#FF69B4] text-[#1A1A1A] text-white hover:bg-[#FF1493] "
+                    }
+                  `}
+                >
+                  {hasFilters ? (
+                    <>
+                      Search
+                      <span className="ml-2 text-sm opacity-80">
+                        · {activeFiltersCount}
+                      </span>
+                    </>
+                  ) : (
+                    "Explore all services"
+                  )}
                 </button>
               </a>
+
             </div>
           </div>
 

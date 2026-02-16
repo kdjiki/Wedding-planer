@@ -1,4 +1,4 @@
-import { Star } from "lucide-react"
+import { Heart } from "lucide-react"
 import Image from "next/image"
 
 interface TestimonialCardProps {
@@ -14,7 +14,7 @@ export function TestimonialCard({ quote, name, weddingDate, image, rating }: Tes
     <div className="bg-white dark:bg-[#1E1E1E] rounded-xl p-6 border border-[#E0E0E0] dark:border-[#2D2D2D] hover:shadow-lg transition-shadow">
       <div className="flex gap-1 mb-4">
         {[...Array(rating)].map((_, i) => (
-          <Star key={i} size={20} className="fill-yellow-400 text-yellow-400" />
+          <Heart key={i} size={20} className="fill-[#FF69B4] text-[#FF69B4]" />
         ))}
       </div>
       <p className="text-[#1A1A1A] dark:text-white mb-6 leading-relaxed italic">&ldquo;{quote}&rdquo;</p>

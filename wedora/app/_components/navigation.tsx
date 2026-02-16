@@ -5,19 +5,19 @@ import "../globals.css"
 import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
+import Image from "next/image"
 
 export function Navigation({ pages }: { pages: Page[] }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-white/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+   <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-white/20">
+     <div className="px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[#FF69B4] rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">W</span>
-            </div>
+                <Image src="/wedoraLogoW.png" alt="Wedora Logo" width={32} height={32} />
             <span className="font-bold text-lg text-[#1A1A1A] dark:text-white pr-6">Wedora</span>
           </Link>
 
@@ -71,6 +71,7 @@ export function Navigation({ pages }: { pages: Page[] }) {
           </div>
         </div>
       )}
+      </div>
     </nav>
   )
 }
