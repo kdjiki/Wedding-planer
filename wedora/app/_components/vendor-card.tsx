@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Star } from "lucide-react"
+import { Heart } from "lucide-react"
 
 interface VendorCardProps {
   image: string
@@ -41,7 +41,7 @@ export function VendorCard({
         <h3 className="text-lg font-bold text-[#1A1A1A] dark:text-white mb-1">{name}</h3>
         <div className="flex items-center gap-2 mb-3">
           <div className="flex items-center gap-1">
-            <Star size={16} className="fill-yellow-400 text-yellow-400" />
+            <Heart size={16} className="text-[#FF69B4] fill-current" />
             <span className="text-sm font-semibold text-[#1A1A1A] dark:text-white">{rating}</span>
           </div>
           <span className="text-sm text-[#666666] dark:text-[#B0B0B0]">({reviewCount} reviews)</span>
