@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Sparkles } from "lucide-react"
 import { SearchBar } from "./_components/search-bar"
 import { FilterPanel } from "./_components/filter-panel"
@@ -17,18 +17,26 @@ export default function WeddingServicesPage() {
   const [favorites, setFavorites] = useState<Set<string>>(
     new Set(allListings.filter((l) => l.isFavorited).map((l) => l.id))
   )
+  const [visibleCount, setVisibleCount] = useState(8)
+
 
   const handleFilterChange = (category: string, value: string) => {
-    setSelectedFilters((prev) => {
-      const current = prev[category] ?? []
-      const updated = current.includes(value)
-        ? current.filter((v) => v !== value)
-        : [...current, value]
-      return { ...prev, [category]: updated }
-    })
-  }
+  setSelectedFilters((prev) => {
+    const current = prev[category] ?? []
+    const updated = current.includes(value)
+      ? current.filter((v) => v !== value)
+      : [...current, value]
 
-  const handleClearFilters = () => setSelectedFilters({})
+    return { ...prev, [category]: updated }
+  })
+
+  setVisibleCount(8)
+}
+
+  const handleClearFilters = () => {
+    setSelectedFilters({})
+    setVisibleCount(8)
+  }
 
   const handleFavorite = (id: string) => {
     setFavorites((prev) => {
@@ -47,7 +55,7 @@ export default function WeddingServicesPage() {
       ...l,
       isFavorited: favorites.has(l.id),
     }))
-
+    
     // Search filter
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase()
@@ -60,6 +68,7 @@ export default function WeddingServicesPage() {
           l.tags?.some((t) => t.toLowerCase().includes(q))
       )
     }
+    
 
     // Sort
     switch (sortBy) {
@@ -84,6 +93,8 @@ export default function WeddingServicesPage() {
 
     return results
   }, [searchQuery, sortBy, favorites])
+
+  const visibleListings = filteredListings.slice(0, visibleCount)
 
   const activeFilterCount = Object.values(selectedFilters).flat().length
 
@@ -116,7 +127,10 @@ export default function WeddingServicesPage() {
         <div className="flex flex-col sm:flex-row gap-3 mb-4">
           <div className="flex-1">
             <SearchBar
-              onSearch={setSearchQuery}
+              onSearch={(value) => {
+                setSearchQuery(value)
+                setVisibleCount(8)
+              }}
               onFilterToggle={() => setShowFilters(!showFilters)}
               filtersActive={activeFilterCount > 0}
             />
@@ -125,7 +139,7 @@ export default function WeddingServicesPage() {
         </div>
 
         {/* Filter Panel */}
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <FilterPanel
             isOpen={showFilters}
             onClose={() => setShowFilters(false)}
@@ -133,20 +147,20 @@ export default function WeddingServicesPage() {
             onFilterChange={handleFilterChange}
             onClearAll={handleClearFilters}
           />
-        </div>
+        </div> */}
 
         {/* Results Count */}
         <div className="flex items-center justify-between mb-5">
           <p className="text-sm text-[#666666] dark:text-[#B0B0B0]">
             <span className="font-semibold text-[#1A1A1A] dark:text-white">{filteredListings.length}</span>{" "}
-            {filteredListings.length === 1 ? "service" : "services"} found
+            {visibleListings.length === 1 ? "service" : "services"} found
           </p>
         </div>
 
         {/* Listings Grid */}
         {filteredListings.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {filteredListings.map((listing) => (
+            {visibleListings.map((listing) => (
               <ServiceListingCard
                 key={listing.id}
                 listing={listing}
@@ -178,9 +192,12 @@ export default function WeddingServicesPage() {
         )}
 
         {/* Load More */}
-        {filteredListings.length > 0 && (
+        {visibleCount < filteredListings.length && (
           <div className="text-center mt-10">
-            <button className="px-8 py-3 border-2 border-[#FF69B4] text-[#FF69B4] rounded-xl font-medium hover:bg-[#FF69B4] hover:text-white transition-colors">
+            <button
+              onClick={() => setVisibleCount((prev) => prev + 8)}
+              className="px-8 py-3 border-2 border-[#FF69B4] text-[#FF69B4] rounded-xl font-medium hover:bg-[#FF69B4] hover:text-white transition-colors"
+            >
               View More Vendors
             </button>
           </div>

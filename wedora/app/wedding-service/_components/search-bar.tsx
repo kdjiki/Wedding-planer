@@ -32,7 +32,7 @@ export function SearchBar({ onSearch, onFilterToggle, showFilterButton = true, f
           value={query}
           onChange={(e) => handleChange(e.target.value)}
           placeholder="Search services, vendors, locations..."
-          className="w-full pl-11 pr-10 py-3 bg-[#F5F5F5] dark:bg-[#1E1E1E] border border-[#E0E0E0] dark:border-[#2D2D2D] rounded-xl text-sm text-[#1A1A1A] dark:text-white placeholder:text-[#666666] dark:placeholder:text-[#B0B0B0] outline-none focus:border-[#FF69B4] focus:ring-2 focus:ring-[#FF69B4]/20 transition-all"
+          className="w-full pl-11 pr-10 py-3 bg-white dark:bg-[#1E1E1E] border border-[#E0E0E0] dark:border-[#2D2D2D] rounded-xl text-sm text-[#1A1A1A] dark:text-white placeholder:text-[#666666] dark:placeholder:text-[#B0B0B0] outline-none focus:border-[#FF69B4] focus:ring-2 focus:ring-[#FF69B4]/20 transition-all"
         />
         {query && (
           <button
@@ -44,7 +44,7 @@ export function SearchBar({ onSearch, onFilterToggle, showFilterButton = true, f
           </button>
         )}
       </div>
-      {showFilterButton && (
+      {/* {showFilterButton && (
         <button
           onClick={onFilterToggle}
           className={`flex items-center gap-2 px-5 py-3 rounded-xl border text-sm font-medium transition-all ${
@@ -58,7 +58,7 @@ export function SearchBar({ onSearch, onFilterToggle, showFilterButton = true, f
           <SlidersHorizontal size={16} />
           <span className="hidden sm:inline">Filters</span>
         </button>
-      )}
+      )} */}
     </div>
   )
 }

@@ -8,7 +8,6 @@ const SORT_OPTIONS = [
   { label: "Price: Low to High", value: "price-asc" },
   { label: "Price: High to Low", value: "price-desc" },
   { label: "Highest Rated", value: "rating" },
-  { label: "Most Reviewed", value: "reviews" },
 ]
 
 interface SortDropdownProps {
