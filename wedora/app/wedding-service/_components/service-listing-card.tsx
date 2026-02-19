@@ -7,7 +7,6 @@ export interface ServiceListing {
   name: string
   category: string
   rating: number
-  reviewCount: number
   location: string
   priceRange: string
   description: string
@@ -64,9 +63,8 @@ export function ServiceListingCard({ listing, onFavorite }: ServiceListingCardPr
             )}
           </div>
           <div className="flex items-center gap-1 shrink-0">
-            <Star size={14} className="fill-yellow-400 text-yellow-400" />
+            <Heart size={14} className="fill-[#FF69B4] text-[#FF69B4]" />
             <span className="text-sm font-semibold text-[#1A1A1A] dark:text-white">{listing.rating}</span>
-            <span className="text-xs text-[#666666] dark:text-[#B0B0B0]">({listing.reviewCount})</span>
           </div>
         </div>
 

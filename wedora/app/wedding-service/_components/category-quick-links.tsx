@@ -3,27 +3,29 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Building2, Camera, UtensilsCrossed, Music, Flower2, ClipboardList } from "lucide-react"
+import { services } from "@app/servicesType";
 
-const categories = [
-  { label: "Venues", href: "/services/venues", icon: Building2 },
-  { label: "Photography", href: "/services/photography", icon: Camera },
-  { label: "Catering", href: "/services/catering", icon: UtensilsCrossed },
-  { label: "Entertainment", href: "/services/entertainment", icon: Music },
-  { label: "Decorations", href: "/services/decorations", icon: Flower2 },
-  { label: "Planning", href: "/services/planning", icon: ClipboardList },
-]
+
+// const categories = [
+//   { label: "Venues", href: "/services/venues", icon: Building2 },
+//   { label: "Photography", href: "/services/photography", icon: Camera },
+//   { label: "Catering", href: "/services/catering", icon: UtensilsCrossed },
+//   { label: "Entertainment", href: "/services/entertainment", icon: Music },
+//   { label: "Decorations", href: "/services/decorations", icon: Flower2 },
+//   { label: "Planning", href: "/services/planning", icon: ClipboardList },
+// ]
 
 export function CategoryQuickLinks() {
   const pathname = usePathname()
 
   return (
     <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
-      {categories.map((cat) => {
+      {services.map((cat) => {
         const isActive = pathname === cat.href
         const Icon = cat.icon
         return (
           <Link
-            key={cat.href}
+            key={cat.id}
             href={cat.href}
             className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all group ${
               isActive
@@ -45,7 +47,7 @@ export function CategoryQuickLinks() {
                 isActive ? "text-[#FF69B4]" : "text-[#1A1A1A] dark:text-white"
               }`}
             >
-              {cat.label}
+              {cat.title}
             </span>
           </Link>
         )

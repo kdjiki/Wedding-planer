@@ -66,9 +66,6 @@ export default function WeddingServicesPage() {
       case "rating":
         results.sort((a, b) => b.rating - a.rating)
         break
-      case "reviews":
-        results.sort((a, b) => b.reviewCount - a.reviewCount)
-        break
       case "price-asc":
         results.sort((a, b) => {
           const priceA = Number.parseFloat(a.priceRange.replace(/[^0-9.]/g, ""))
