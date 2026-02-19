@@ -1,4 +1,4 @@
-import { Building2, Camera, UtensilsCrossed, Music, Sparkles, ClipboardList } from "lucide-react";
+import { Building2, Camera, UtensilsCrossed, Music, Sparkles} from "lucide-react";
 
 
 export const services = [
@@ -32,18 +32,11 @@ export const services = [
     },
     {
       icon: Sparkles,
-      title: "Decorations",
-      id: "decorations",
-      description: "Create stunning ambiance",
+      title: "Other Services",
+      id: "other-services",
+      description: "Everything else you need for your big day",
       href: "/wedding-service/other-services",
     },
-    {
-      icon: ClipboardList,
-      title: "Wedding Planning",
-      id: "wedding-planning",
-      description: "Professional guidance",
-      href: "/wedding-service/other-services",
-    }
   ]
 
 export const location = [

@@ -1,46 +1,11 @@
 "use client"
 
-import { VendorCard } from "./vendor-card"
+import { ServiceListingCard } from "./service-listing-card"
+import { allListings } from "@data/listings"
+
+const vendors = allListings.filter(listing => listing.rating >= 4.7).slice(0, 4)
 
 export function FeaturedVendorsSection() {
-  const vendors = [
-    {
-      image: "/wedding-rings-on-elegant-surface.jpg",
-      name: "Elegant Events Photography",
-      category: "Photography",
-      rating: 4.9,
-      reviewCount: 127,
-      startingPrice: "$1,500",
-      isNew: false,
-    },
-    {
-      image: "/grand-ballroom-wedding-venue-with-chandeliers.jpg",
-      name: "Grand Ballroom Venue",
-      category: "Venues",
-      rating: 5.0,
-      reviewCount: 89,
-      startingPrice: "$3,000",
-      isNew: true,
-    },
-    {
-      image: "/gourmet-wedding-catering-buffet-display.jpg",
-      name: "Gourmet Catering Co.",
-      category: "Catering",
-      rating: 4.8,
-      reviewCount: 156,
-      startingPrice: "$75/guest",
-      isNew: false,
-    },
-    {
-      image: "/live-band-performing-at-wedding-reception.jpg",
-      name: "Harmony Wedding Band",
-      category: "Entertainment",
-      rating: 4.9,
-      reviewCount: 94,
-      startingPrice: "$2,200",
-      isNew: true,
-    },
-  ]
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#F5F5F5] dark:bg-[#1E1E1E]">
@@ -54,7 +19,7 @@ export function FeaturedVendorsSection() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {vendors.map((vendor) => (
-            <VendorCard key={vendor.name} {...vendor} />
+              <ServiceListingCard key={vendor.id} listing={vendor} />
           ))}
         </div>
 
