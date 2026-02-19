@@ -1,6 +1,7 @@
 "use client"
 
 import { X } from "lucide-react"
+import {location} from "../../servicesType"
 
 interface FilterPanelProps {
   isOpen: boolean
@@ -14,7 +15,7 @@ const FILTER_OPTIONS = {
   "Price Range": ["Under $500", "$500 - $1,000", "$1,000 - $5,000", "$5,000+"],
   Rating: ["4.5+", "4.0+", "3.5+", "Any"],
   Availability: ["This Month", "Next 3 Months", "Next 6 Months", "Any Date"],
-  Location: ["Downtown", "Suburbs", "Countryside", "Beach / Coast"],
+  Location: location.map(loc => loc.name),
 }
 
 export function FilterPanel({ isOpen, onClose, selectedFilters, onFilterChange, onClearAll }: FilterPanelProps) {

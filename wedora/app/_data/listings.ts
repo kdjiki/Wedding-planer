@@ -1,4 +1,16 @@
-import type { ServiceListing } from "../_components/service-listing-card"
+
+export interface ServiceListing {
+  id: string
+  image: string
+  name: string
+  category: string
+  rating: number
+  location: string
+  priceRange: string
+  description: string
+  isFavorited?: boolean
+  tags?: string[]
+}
 
 export const allListings: ServiceListing[] = [
   {
@@ -10,7 +22,6 @@ export const allListings: ServiceListing[] = [
     location: "Meadow Hills, Countryside",
     priceRange: "$3,500",
     description: "A stunning outdoor garden venue surrounded by rose bushes and ancient oak trees. Perfect for intimate and grand weddings alike.",
-    isVerified: true,
     isFavorited: false,
     tags: ["Outdoor", "Garden", "Up to 300 guests"],
   },
@@ -19,11 +30,10 @@ export const allListings: ServiceListing[] = [
     image: "/services/venue-ballroom.jpg",
     name: "Grand Ballroom Venue",
     category: "Venues",
-    rating: 4.8,
+    rating: 4.0,
     location: "Downtown, City Center",
     priceRange: "$6,000",
     description: "An opulent ballroom with crystal chandeliers, marble floors, and world-class staff to make your celebration unforgettable.",
-    isVerified: true,
     isFavorited: true,
     tags: ["Indoor", "Luxury", "Up to 500 guests"],
   },
@@ -36,7 +46,6 @@ export const allListings: ServiceListing[] = [
     location: "Available Citywide",
     priceRange: "$2,500",
     description: "Award-winning wedding photography that captures every emotion. Candid and editorial styles with a quick turnaround time.",
-    isVerified: true,
     isFavorited: false,
     tags: ["Candid", "Editorial", "Drone shots"],
   },
@@ -49,7 +58,6 @@ export const allListings: ServiceListing[] = [
     location: "Serves all areas",
     priceRange: "$75/person",
     description: "Exquisite multi-course menus crafted by our Michelin-trained chefs. From hors d'oeuvres to custom wedding cakes.",
-    isVerified: true,
     isFavorited: false,
     tags: ["Fine Dining", "Custom Menus", "Allergies-friendly"],
   },
@@ -62,7 +70,6 @@ export const allListings: ServiceListing[] = [
     location: "Available Nationwide",
     priceRange: "$3,200",
     description: "A 7-piece live band specializing in wedding receptions. From jazz cocktail hours to dance floor hits that keep guests moving.",
-    isVerified: false,
     isFavorited: false,
     tags: ["Live Band", "DJ option", "Ceremony music"],
   },
@@ -75,7 +82,6 @@ export const allListings: ServiceListing[] = [
     location: "Metro Area",
     priceRange: "$1,800",
     description: "Bespoke floral arrangements and venue styling. From romantic centerpieces to breathtaking ceremony arches.",
-    isVerified: true,
     isFavorited: true,
     tags: ["Floral Design", "Venue Styling", "Custom themes"],
   },
@@ -88,7 +94,6 @@ export const allListings: ServiceListing[] = [
     location: "City & Suburbs",
     priceRange: "$4,500",
     description: "Full-service wedding planning from start to finish. We handle every detail so you can enjoy the journey to your big day.",
-    isVerified: true,
     isFavorited: false,
     tags: ["Full Service", "Day-of Coordination", "Budget-friendly"],
   },
@@ -101,8 +106,31 @@ export const allListings: ServiceListing[] = [
     location: "Sunset Beach, Coast",
     priceRange: "$4,200",
     description: "Say your vows with the ocean as your backdrop. Beachfront ceremonies and tented receptions with stunning sunset views.",
-    isVerified: false,
     isFavorited: false,
     tags: ["Beach", "Outdoor", "Up to 200 guests"],
   },
+  {
+    id: "9",
+    image: "/services/photographer-candid.jpg",
+    name: "True Moments Photography",
+    category: "Photography",
+    rating: 4.6,
+    location: "Available Citywide",
+    priceRange: "$2,000",
+    description: "Natural, candid wedding photography that tells your love story. We blend into the background to capture genuine moments.",
+    isFavorited: false,
+    tags: ["Candid", "Photojournalistic", "Same-day edits"],
+  },
+  {
+    id: "10",
+    image: "/services/catering-buffet.jpg",
+    name: "Feast & Fête Catering",
+    category: "Catering",
+    rating: 4.5,
+    location: "Serves all areas",
+    priceRange: "$60/person",
+    description: "Delicious buffet-style catering with a variety of cuisines. Perfect for casual and semi-formal weddings.",
+    isFavorited: false,
+    tags: ["Buffet", "Variety of Cuisines", "Budget-friendly"],
+  }
 ]

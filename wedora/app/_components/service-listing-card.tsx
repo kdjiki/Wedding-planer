@@ -1,19 +1,7 @@
-import { Star, MapPin, Heart, CheckCircle } from "lucide-react"
+import { MapPin, Heart } from "lucide-react"
 import Image from "next/image"
+import { ServiceListing } from "@data/listings"
 
-export interface ServiceListing {
-  id: string
-  image: string
-  name: string
-  category: string
-  rating: number
-  location: string
-  priceRange: string
-  description: string
-  isVerified?: boolean
-  isFavorited?: boolean
-  tags?: string[]
-}
 
 interface ServiceListingCardProps {
   listing: ServiceListing
@@ -58,9 +46,6 @@ export function ServiceListingCard({ listing, onFavorite }: ServiceListingCardPr
         <div className="flex items-start justify-between gap-2 mb-2">
           <div className="flex items-center gap-2 min-w-0">
             <h3 className="text-base font-bold text-[#1A1A1A] dark:text-white truncate">{listing.name}</h3>
-            {listing.isVerified && (
-              <CheckCircle size={16} className="text-[#FF69B4] shrink-0" aria-label="Verified vendor" />
-            )}
           </div>
           <div className="flex items-center gap-1 shrink-0">
             <Heart size={14} className="fill-[#FF69B4] text-[#FF69B4]" />

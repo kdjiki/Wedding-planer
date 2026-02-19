@@ -4,10 +4,10 @@ import { useState, useMemo } from "react"
 import { Sparkles } from "lucide-react"
 import { SearchBar } from "./_components/search-bar"
 import { FilterPanel } from "./_components/filter-panel"
-import { ServiceListingCard } from "./_components/service-listing-card"
+import { ServiceListingCard } from "../_components/service-listing-card"
 import { CategoryQuickLinks } from "./_components/category-quick-links"
 import { SortDropdown } from "./_components/sort-dropdown"
-import { allListings } from "./_data/listings"
+import { allListings } from "../_data/listings"
 
 export default function WeddingServicesPage() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -181,7 +181,7 @@ export default function WeddingServicesPage() {
         {filteredListings.length > 0 && (
           <div className="text-center mt-10">
             <button className="px-8 py-3 border-2 border-[#FF69B4] text-[#FF69B4] rounded-xl font-medium hover:bg-[#FF69B4] hover:text-white transition-colors">
-              View All Vendors
+              View More Vendors
             </button>
           </div>
         )}
