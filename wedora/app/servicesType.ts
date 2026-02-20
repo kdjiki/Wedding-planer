@@ -1,5 +1,14 @@
-import { Building2, Camera, UtensilsCrossed, Music, Sparkles} from "lucide-react";
+import { LucideIcon } from "lucide-react";
+import { Building2, Camera, UtensilsCrossed, Music, Sparkles } from "lucide-react"
 
+
+export interface ServiceType {
+  icon: LucideIcon
+  title: string
+  category: string          // must match the category field in listings.ts
+  description: string
+  href: string
+}
 
 export const services = [
     {
@@ -7,6 +16,7 @@ export const services = [
       title: "Wedding Halls",
       id: "wedding-halls",
       description: "Find your perfect location",
+      category: "Wedding Halls",
       href: "/wedding-service/wedding-halls",
     },
     {
@@ -14,6 +24,7 @@ export const services = [
       title: "Photographers",
       id: "photographers",
       description: "Capture every precious moment",
+      category: "Photography",
       href: "/wedding-service/photographers",
     },
     {
@@ -21,6 +32,7 @@ export const services = [
       title: "Catering",
       id: "catering",
       description: "Delight your guests",
+      category: "Catering",
       href: "/wedding-service/catering",
     },
     {
@@ -28,16 +40,24 @@ export const services = [
       title: "Music & Entertainment",
       id: "music-entertainment",
       description: "Set the perfect mood",
-      href: "/wedding-service/bands-djs",
+      category: "Music",
+      href: "/wedding-service/music-entertainment",
     },
     {
       icon: Sparkles,
       title: "Other Services",
       id: "other-services",
       description: "Everything else you need for your big day",
+      category: "Other",
       href: "/wedding-service/other-services",
     },
   ]
+
+  export function getServiceType(id: string): ServiceType {
+  const found = services.find((s) => s.id === id)
+  if (!found) throw new Error(`Unknown service type: ${id}`)
+  return found
+}
 
 export const location = [
     { id: "zagreb", name: "Zagreb" },

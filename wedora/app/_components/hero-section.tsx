@@ -5,6 +5,7 @@ import {Select, SelectSection, SelectItem} from "@heroui/select";
 import Image from "next/image"
 import { useMemo, useState } from "react"
 import { Selection } from "@react-types/shared"
+import { useRouter } from "next/navigation"
 
 import {services, location} from "../servicesType"
 import { DatePicker } from "./date-picker";  
@@ -33,6 +34,29 @@ export function HeroSection() {
 
   const hasFilters = activeFiltersCount > 0;
 
+  const router = useRouter();
+
+  const handleSearch = () => {
+  const serviceKey = Array.from(selectedService)[0]
+  const locationKey = Array.from(selectedLocation)[0]
+
+  const params = new URLSearchParams()
+
+  if (locationKey) params.set("location", String(locationKey))
+  if (weddingDate) {
+    const year = weddingDate.getFullYear()
+    const month = String(weddingDate.getMonth() + 1).padStart(2, "0")
+    const day = String(weddingDate.getDate()).padStart(2, "0")
+
+    params.set("date", `${year}-${month}-${day}`)
+  }
+
+  if (serviceKey) {
+    router.push(`/wedding-service/${String(serviceKey)}?${params.toString()}`)
+  } else {
+    router.push(`/wedding-service?${params.toString()}`)
+  }
+}
 
 
   return (
@@ -111,8 +135,9 @@ export function HeroSection() {
                   />
               </div>
 
-              <a href="/wedding-service">
+              
                 <button
+                  onClick={handleSearch}
                   className={`w-full py-3 rounded-lg transition-colors font-medium cursor-pointer
                     ${hasFilters
                       ? "bg-[#FF69B4] hover:bg-[#FF1493] text-white"
@@ -131,7 +156,6 @@ export function HeroSection() {
                     "Explore all services"
                   )}
                 </button>
-              </a>
 
             </div>
           </div>

@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Building2, Camera, UtensilsCrossed, Music, Flower2, ClipboardList } from "lucide-react"
 import { services } from "@app/servicesType";
 
 
