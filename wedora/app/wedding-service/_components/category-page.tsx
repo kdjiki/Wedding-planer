@@ -6,12 +6,19 @@ import { SortDropdown } from "./sort-dropdown"
 import { ServiceListingCard } from "@app/_components/service-listing-card"
 import { allListings } from "@app/_data/listings"
 import { getServiceType } from "@app/servicesType"
+import { useSearchParams } from "next/dist/client/components/navigation"
 
 interface CategoryPageProps {
   serviceId: string
 }
 
 export function CategoryPage({ serviceId }: CategoryPageProps) {
+
+  const searchParams = useSearchParams()
+  
+  const urlLocation = searchParams.get("location")
+  const urlDate = searchParams.get("date")
+
   const { category, title, description: description, icon: Icon } = getServiceType(serviceId)
   const [searchQuery, setSearchQuery] = useState("")
   const [sortBy, setSortBy] = useState("recommended")
@@ -29,9 +36,40 @@ export function CategoryPage({ serviceId }: CategoryPageProps) {
   }
 
   const listings = useMemo(() => {
-    let results = allListings
-      .filter((l) => l.category === category)
-      .map((l) => ({ ...l, isFavorited: favorites.has(l.id) }))
+
+    let results = allListings.map((l) => ({
+      ...l,
+      isFavorited: favorites.has(l.id),
+      
+    }))
+
+    /* ---------------- URL FILTERS ---------------- */
+
+    if (urlLocation) {
+      results = results.filter((l) => l.location.toLowerCase() === urlLocation.toLowerCase())
+    }
+
+    if (urlDate) {
+      const urlD = new Date(urlDate)
+
+      results = results.filter((l) => {
+        if (!l.dateBooked) return true
+
+        const isBookedThatDay = l.dateBooked.some((d) => {
+          return (
+            d.getFullYear() === urlD.getFullYear() &&
+            d.getMonth() === urlD.getMonth() &&
+            d.getDate() === urlD.getDate()
+          )
+        })
+
+        return !isBookedThatDay
+      })
+    }
+
+    /* ---------------- CATEGORY FILTER ---------------- */
+
+    results = results.filter((l) => l.category.toLowerCase() === category.toLowerCase())
 
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase()
@@ -65,7 +103,7 @@ export function CategoryPage({ serviceId }: CategoryPageProps) {
     }
 
     return results
-  }, [category, searchQuery, sortBy, favorites])
+  },  [searchQuery, sortBy, favorites, urlLocation, urlDate])
 
   return (
     <div className="pt-16">
