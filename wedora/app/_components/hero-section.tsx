@@ -43,7 +43,13 @@ export function HeroSection() {
   const params = new URLSearchParams()
 
   if (locationKey) params.set("location", String(locationKey))
-  if (weddingDate) params.set("date", weddingDate.toISOString())
+  if (weddingDate) {
+    const year = weddingDate.getFullYear()
+    const month = String(weddingDate.getMonth() + 1).padStart(2, "0")
+    const day = String(weddingDate.getDate()).padStart(2, "0")
+
+    params.set("date", `${year}-${month}-${day}`)
+  }
 
   if (serviceKey) {
     router.push(`/wedding-service/${String(serviceKey)}?${params.toString()}`)
