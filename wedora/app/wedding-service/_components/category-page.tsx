@@ -14,10 +14,10 @@ interface CategoryPageProps {
 
 export function CategoryPage({ serviceId }: CategoryPageProps) {
 
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
   
-  const urlLocation = searchParams.get("location")
-  const urlDate = searchParams.get("date")
+  // const urlLocation = searchParams.get("location")
+  // const urlDate = searchParams.get("date")
 
   const { category, title, description: description, icon: Icon } = getServiceType(serviceId)
   const [searchQuery, setSearchQuery] = useState("")
@@ -45,27 +45,27 @@ export function CategoryPage({ serviceId }: CategoryPageProps) {
 
     /* ---------------- URL FILTERS ---------------- */
 
-    if (urlLocation) {
-      results = results.filter((l) => l.location.toLowerCase() === urlLocation.toLowerCase())
-    }
+    // if (urlLocation) {
+    //   results = results.filter((l) => l.location.toLowerCase() === urlLocation.toLowerCase())
+    // }
 
-    if (urlDate) {
-      const urlD = new Date(urlDate)
+    // if (urlDate) {
+    //   const urlD = new Date(urlDate)
 
-      results = results.filter((l) => {
-        if (!l.dateBooked) return true
+    //   results = results.filter((l) => {
+    //     if (!l.dateBooked) return true
 
-        const isBookedThatDay = l.dateBooked.some((d) => {
-          return (
-            d.getFullYear() === urlD.getFullYear() &&
-            d.getMonth() === urlD.getMonth() &&
-            d.getDate() === urlD.getDate()
-          )
-        })
+    //     const isBookedThatDay = l.dateBooked.some((d) => {
+    //       return (
+    //         d.getFullYear() === urlD.getFullYear() &&
+    //         d.getMonth() === urlD.getMonth() &&
+    //         d.getDate() === urlD.getDate()
+    //       )
+    //     })
 
-        return !isBookedThatDay
-      })
-    }
+    //     return !isBookedThatDay
+    //   })
+    // }
 
     /* ---------------- CATEGORY FILTER ---------------- */
 
@@ -103,7 +103,8 @@ export function CategoryPage({ serviceId }: CategoryPageProps) {
     }
 
     return results
-  },  [searchQuery, sortBy, favorites, urlLocation, urlDate])
+  },  [   searchQuery, sortBy, favorites, category]) // urlLocation, urlDate
+  // [searchQuery, sortBy, favorites, urlLocation, urlDate])
 
   return (
     <div className="pt-16">
