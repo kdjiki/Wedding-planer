@@ -3,7 +3,10 @@
 import { ServiceListingCard } from "./service-listing-card"
 import { allListings } from "@data/listings"
 
-const vendors = allListings.filter(listing => listing.rating >= 4.7).slice(0, 4)
+// four best rated venues, music, decorations and planners
+const vendors = allListings.filter((l) =>
+  ["Wedding Halls", "Music", "Other"].includes(l.category)
+).sort((a, b) => b.rating - a.rating).slice(0, 4)
 
 export function FeaturedVendorsSection() {
 
