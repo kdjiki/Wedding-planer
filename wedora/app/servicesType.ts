@@ -41,7 +41,7 @@ export const services = [
       id: "music-entertainment",
       description: "Set the perfect mood",
       category: "Music",
-      href: "/wedding-service/bands-djs",
+      href: "/wedding-service/music-entertainment",
     },
     {
       icon: Sparkles,
