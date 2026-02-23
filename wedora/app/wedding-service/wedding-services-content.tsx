@@ -9,6 +9,7 @@ import { ServiceListingCard } from "../_components/service-listing-card"
 import { CategoryQuickLinks } from "./_components/category-quick-links"
 import { SortDropdown } from "./_components/sort-dropdown"
 import { allListings } from "../_data/listings"
+import { BackButton } from "../_components/back-button"
 
 // 1. Ovdje ide tvoja glavna logika (Content komponenta)
 export default function WeddingServicesContent() {
@@ -106,6 +107,7 @@ export default function WeddingServicesContent() {
       {/* HEADER */}
       <section className="bg-white dark:bg-[#1E1E1E] border-b border-[#E0E0E0] dark:border-[#2D2D2D]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          <BackButton />
           <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 bg-[#FFB6C1]/20 dark:bg-[#FF69B4]/20 rounded-full flex items-center justify-center">
               <Sparkles size={20} className="text-[#FF69B4]" />

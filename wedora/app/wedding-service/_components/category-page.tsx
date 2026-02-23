@@ -7,6 +7,7 @@ import { ServiceListingCard } from "@app/_components/service-listing-card"
 import { allListings } from "@app/_data/listings"
 import { getServiceType } from "@app/servicesType"
 import { useSearchParams } from "next/dist/client/components/navigation"
+import { BackButton } from "@/app/_components/back-button"
 
 interface CategoryPageProps {
   serviceId: string
@@ -110,6 +111,7 @@ export function CategoryPage({ serviceId }: CategoryPageProps) {
       {/* Page Header */}
       <section className="bg-white dark:bg-[#1E1E1E] border-b border-[#E0E0E0] dark:border-[#2D2D2D]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          <BackButton />
           <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 bg-[#FFB6C1]/20 dark:bg-[#FF69B4]/20 rounded-full flex items-center justify-center">
               <Icon size={20} className="text-[#FF69B4]" />
