@@ -47,8 +47,8 @@ export const serviceTags = pgTable("service_tags", {
 })
 
 //
-// BOOKINGS (umjesto dateBooked: Date[])
-// Normalizirana relacija
+// BOOKINGS (insted of dateBooked: Date[])
+// 
 //
 export const bookings = pgTable("bookings", {
   id: uuid("id").defaultRandom().primaryKey(),
