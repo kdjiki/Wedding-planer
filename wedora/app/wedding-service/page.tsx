@@ -3,7 +3,7 @@
 
 import { Suspense} from "react" // Dodaj Suspense
 
-import WeddingServicesContent from "./WeddingServicesContent"
+import WeddingServicesContent from "./wedding-services-content"
 
 export default function WeddingServicesPage() {
   return (

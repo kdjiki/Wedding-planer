@@ -20,8 +20,11 @@ export default async function ServiceDetailsPage({
 
   return (
     <div className="pt-16">
-      <div className="max-w-5xl mx-auto px-4 py-10">
-        <BackButton />
+      {/* HEADER */}
+      <section className="bg-white dark:bg-[#1E1E1E] border-b border-[#E0E0E0] dark:border-[#2D2D2D]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          <BackButton />
+         
         
         <div className="relative w-full h-[400px] rounded-xl overflow-hidden mb-8">
           <Image
@@ -54,7 +57,9 @@ export default async function ServiceDetailsPage({
         <p className="text-lg text-[#666666] dark:text-[#B0B0B0]">
           {service.description}
         </p>
+
       </div>
+      </section>
     </div>
   )
 }

@@ -6,9 +6,11 @@ import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 
 export function Navigation({ pages }: { pages: Page[] }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-white/20">
@@ -25,15 +27,32 @@ export function Navigation({ pages }: { pages: Page[] }) {
           <div className="hidden md:flex items-center gap-8">
             {pages
               .filter((link) => link.title !== "Login")
-              .map((link) => (
-              <Link
-                key={link.path}
-                href={link.path}
-                className="py-4 text-[#1A1A1A] dark:text-white hover:text-[#FF1493] dark:hover:text-[#FFB6C1] transition-colors text-center text-sm font-medium"
-              >
-                {link.title}
-              </Link>
-            ))}
+              .map((link) => {
+                const isActive =
+                pathname === link.path ||
+                pathname.startsWith(link.path + "/")
+
+              return (  
+                <Link
+                  key={link.path}
+                  href={link.path}
+                  className={`
+                    relative py-4 text-sm font-medium transition-colors
+                    ${
+                      isActive
+                        ? "text-[#FF1493] dark:text-[#FFB6C1]"
+                        : "text-[#1A1A1A] dark:text-white hover:text-[#FF1493] dark:hover:text-[#FFB6C1]"
+                    }
+                  `}
+                >
+                  {link.title}
+
+                  {/* Active underline */}
+                  {isActive && (
+                    <span className="absolute left-0 -bottom-1 h-[2px] w-full bg-[#FF1493] dark:bg-[#FFB6C1] rounded-full" />
+                  )}
+                </Link>
+              )})}
             <button className="px-6 py-2 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium cursor-pointer">
               <a href="/login">
                 Login
@@ -53,16 +72,26 @@ export function Navigation({ pages }: { pages: Page[] }) {
         <div className="md:hidden bg-white dark:bg-[#1E1E1E] border-t border-[#E0E0E0] dark:border-[#2D2D2D]">
           <div className="px-4 py-4 space-y-3">
             {pages.filter((link) => link.title !== "Login")
-            .map((link) => (
+            .map((link) => {
+                const isActive =
+                pathname === link.path ||
+                pathname.startsWith(link.path + "/")
+              return (
               <Link
                 key={link.path}
                 href={link.path}
-                className="block text-[#1A1A1A] dark:text-white hover:text-[#FF1493] dark:hover:text-[#FFB6C1] transition-colors font-medium"
+                className={`
+                  block transition-colors font-medium
+                  ${isActive
+                    ? "text-[#FF1493] dark:text-[#FFB6C1]"
+                    : "text-[#1A1A1A] dark:text-white hover:text-[#FF1493] dark:hover:text-[#FFB6C1]"
+                  }
+                `}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.title}
               </Link>
-            ))}
+            )})}
             <button className="w-full px-6 py-2 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium">
               <a href="/login">
                 Login
