@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation"
 import Image from "next/image"
-import { allListings } from "@app/_data/listings"
 import { Heart, MapPin } from "lucide-react"
 
+import { allListings } from "@app/_data/listings"
+import { BackButton } from "@app/_components/back-button"
 
 export default async function ServiceDetailsPage({
   params,
@@ -20,6 +21,7 @@ export default async function ServiceDetailsPage({
   return (
     <div className="pt-16">
       <div className="max-w-5xl mx-auto px-4 py-10">
+        <BackButton />
         
         <div className="relative w-full h-[400px] rounded-xl overflow-hidden mb-8">
           <Image
