@@ -1,6 +1,9 @@
 import { MapPin, Heart } from "lucide-react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
+
 import { ServiceListing } from "@data/listings"
+
 
 
 interface ServiceListingCardProps {
@@ -9,6 +12,9 @@ interface ServiceListingCardProps {
 }
 
 export function ServiceListingCard({ listing, onFavorite }: ServiceListingCardProps) {
+
+  const router = useRouter();
+
   return (
     <div className="group bg-white dark:bg-[#1E1E1E] border border-[#E0E0E0] dark:border-[#2D2D2D] rounded-xl overflow-hidden hover:shadow-lg hover:border-[#FF69B4] transition-all">
       {/* Image */}
@@ -85,7 +91,10 @@ export function ServiceListingCard({ listing, onFavorite }: ServiceListingCardPr
             <span className="text-xs text-[#666666] dark:text-[#B0B0B0]">Starting at</span>
             <p className="text-base font-bold text-[#1A1A1A] dark:text-white">{listing.priceRange}</p>
           </div>
-          <button className="px-5 py-2 bg-[#FF69B4] text-white text-sm font-medium rounded-lg hover:bg-[#FF1493] transition-colors">
+          <button 
+            className="px-5 py-2 bg-[#FF69B4] text-white text-sm font-medium rounded-lg hover:bg-[#FF1493] transition-colors"
+            onClick={() => router.push(`/wedding-service/${listing.id}`)}
+            >
             View Details
           </button>
         </div>
