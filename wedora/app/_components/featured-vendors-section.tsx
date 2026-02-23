@@ -1,14 +1,15 @@
-"use client"
-
+import { db } from "@/db"
+import { serviceListings } from "@/db/schema"
+import { desc, inArray } from "drizzle-orm"
 import { ServiceListingCard } from "./service-listing-card"
-import { allListings } from "@data/listings"
 
-// four best rated venues, music, decorations and planners
-const vendors = allListings.filter((l) =>
-  ["Wedding Halls", "Music", "Other"].includes(l.category)
-).sort((a, b) => b.rating - a.rating).slice(0, 4)
-
-export function FeaturedVendorsSection() {
+export async function FeaturedVendorsSection() {
+  // Dohvati 4 najbolje ocijenjena iz određenih kategorija
+  const vendors = await db
+    .select()
+    .from(serviceListings)
+    .orderBy(desc(serviceListings.rating))
+    .limit(4)
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#F5F5F5] dark:bg-[#1E1E1E]">
