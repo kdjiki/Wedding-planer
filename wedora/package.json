@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed": "tsx db/seed.ts"
   },
   "dependencies": {
     "@heroui/calendar": "^2.2.29",
@@ -36,6 +37,7 @@
     "eslint": "^4.0.0",
     "eslint-config-next": "^0.2.4",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }
