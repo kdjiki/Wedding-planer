@@ -1,7 +1,4 @@
 import { db } from "./index"
-<<<<<<< Updated upstream
-import { serviceListings, serviceTags, bookings } from "./schema"
-=======
 import {
   serviceListings,
   serviceTags,
@@ -16,7 +13,6 @@ import {
   GUIDE_ARTICLES,
   REAL_WEDDING_STORIES,
 } from "@/app/inspiration/_data/guides-and-stories"
->>>>>>> Stashed changes
 
 const BASE_URL =
   "https://sxutxqfwyxzlgsnvonvr.supabase.co/storage/v1/object/public/services"
@@ -155,8 +151,6 @@ async function seed() {
         tag,
       })
     }
-<<<<<<< Updated upstream
-=======
 
     // 3️⃣ Insert bookings
     const datesMap = [
@@ -234,44 +228,10 @@ async function seed() {
 
     console.log("✅ Database seeded successfully!")
     process.exit(0)
-
   } catch (err) {
     console.error("❌ Seeding failed:", err)
     process.exit(1)
->>>>>>> Stashed changes
   }
-
-  // 3️⃣ Insert booked dates
-  const datesMap = [
-    ["2026-09-15", "2026-10-20"],
-    ["2026-11-05", "2026-12-15"],
-    ["2026-08-10", "2026-09-25"],
-    ["2026-07-15", "2026-08-30"],
-    ["2026-10-01", "2026-11-15"],
-    ["2026-09-20", "2026-10-30"],
-    ["2026-08-01", "2026-09-15"],
-    ["2026-07-20", "2026-08-25"],
-    ["2026-09-10", "2026-10-20"],
-    ["2026-08-15", "2026-09-30"],
-  ]
-
-  for (let i = 0; i < insertedListings.length; i++) {
-    const listingId = insertedListings[i].id
-    const dates = datesMap[i]
-
-    for (const date of dates) {
-      await db.insert(bookings).values({
-        serviceId: listingId,
-        bookedDate: new Date(date),
-      })
-    }
-  }
-
-  console.log("✅ Database seeded successfully!")
-  process.exit(0)
 }
 
-seed().catch((err) => {
-  console.error("❌ Seeding failed:", err)
-  process.exit(1)
-})
+seed()
