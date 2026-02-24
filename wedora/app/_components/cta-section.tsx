@@ -1,7 +1,7 @@
 export function CtaSection() {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#121212]">
-      <div className="max-w-4xl mx-auto">
+     <section  className="pt-18 pb-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#121212]">
+      <div className="max-w-7xl mx-auto">
         <div className="bg-gradient-to-r from-[#FF69B4] to-[#FFB6C1] rounded-2xl p-12 text-center shadow-xl">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to Start Planning?</h2>
           <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
