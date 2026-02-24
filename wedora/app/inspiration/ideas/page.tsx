@@ -1,7 +1,7 @@
 import { Lightbulb } from "lucide-react"
 import { InspirationQuickLinks } from "../_components/inspiration-quick-links"
-import { ReadyToPlanCta } from "../_components/ready-to-plan-cta"
 import { IdeasContent } from "../_components/ideas-content"
+import { CtaSection } from "@/app/_components/cta-section"
 
 export default function IdeasPage() {
   return (
@@ -28,7 +28,7 @@ export default function IdeasPage() {
         </div>
         <IdeasContent />
       </div>
-      <ReadyToPlanCta />
+      <CtaSection/>
     </div>
   )
 }

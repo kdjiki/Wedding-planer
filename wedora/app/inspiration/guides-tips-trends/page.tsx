@@ -1,6 +1,5 @@
 import { BookOpen, Heart } from "lucide-react";
 import { InspirationQuickLinks } from "../_components/inspiration-quick-links";
-import { ReadyToPlanCta } from "../_components/ready-to-plan-cta";
 import { GuideFeaturedCard } from "../_components/guide-featured-card";
 import { GuideSmallCard } from "../_components/guide-small-card";
 import { RealWeddingCard } from "../_components/real-wedding-card";
@@ -9,6 +8,7 @@ import {
   GUIDE_ARTICLES,
   REAL_WEDDING_STORIES,
 } from "../_data/guides-and-stories";
+import { CtaSection } from "@/app/_components/cta-section";
 
 export default function GuidesTipsTrendsPage() {
   return (
@@ -60,7 +60,7 @@ export default function GuidesTipsTrendsPage() {
           </div>
         </section>
       </div>
-      <ReadyToPlanCta />
+      <CtaSection/>
     </div>
   );
 }
