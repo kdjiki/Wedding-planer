@@ -9,24 +9,13 @@ import { ServiceListingCard } from "../_components/service-listing-card"
 import { CategoryQuickLinks } from "./_components/category-quick-links"
 import { SortDropdown } from "./_components/sort-dropdown"
 import { BackButton } from "../_components/back-button"
+import { ServiceListing } from "@data/listings"
 
-interface Listing {
-  id: string
-  image: string
-  name: string
-  category: string
-  rating: number
-  location: string
-  priceRange: string
-  description: string
-  tags?: string[]
-  dateBooked?: Date[]
-}
 
 export default function WeddingServicesContent({
   initialListings,
 }: {
-  initialListings: Listing[]
+  initialListings: ServiceListing[]
 }) {
   const searchParams = useSearchParams()
 

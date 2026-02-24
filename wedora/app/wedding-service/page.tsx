@@ -1,24 +1,20 @@
 import { db } from "@/db"
-import {
-  serviceListings,
-  serviceTags,
-  bookings,
-} from "@/db/schema"
+import {serviceListings, serviceTags, bookings} from "@/db/schema"
 import { Suspense } from "react"
 
 import WeddingServicesContent from "./wedding-services-content"
 
 export default async function WeddingServicesPage() {
-  // Dohvati sve servise
+  // Fetch all services from the database
   const services = await db.select().from(serviceListings)
 
-  // Dohvati sve tagove
+  // Fetch all tags
   const tags = await db.select().from(serviceTags)
 
-  // Dohvati sve bookinge
+  // Fetch all bookings to determine availability
   const allBookings = await db.select().from(bookings)
 
-  // Mapiraj podatke u shape koji frontend očekuje
+  // Map database records to the ServiceListing format expected by the frontend
   const listings = services.map((service) => ({
     id: service.id,
     image: service.image,
