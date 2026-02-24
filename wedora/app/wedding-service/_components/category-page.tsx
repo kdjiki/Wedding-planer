@@ -6,9 +6,11 @@ import { SortDropdown } from "./sort-dropdown"
 import { ServiceListingCard } from "@/app/_components/service-listing-card"
 import { BackButton } from "@/app/_components/back-button"
 import { getServiceType } from "@/app/servicesType"
+import { usePathname, useRouter } from "next/navigation"
 
 // Uvezi akcije koje smo napravili
 import { toggleFavoriteAction, fetchUserFavorites } from "@/lib/favorites-actions"
+import { supabase } from "@/lib/supabase"
 
 interface CategoryPageProps {
   serviceId: string
@@ -27,6 +29,9 @@ export function CategoryPage({
   // --- LOGIKA ZA FAVORITE (Ista kao u WeddingServicesContent) ---
   const [mounted, setMounted] = useState(false)
   const [favorites, setFavorites] = useState<Set<string>>(new Set())
+
+  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     setMounted(true)
@@ -49,7 +54,13 @@ export function CategoryPage({
     syncWithDB()
   }, [])
 
-  const handleFavorite = (id: string) => {
+  const handleFavorite = async (id: string) => {
+     const { data } = await supabase.auth.getUser()
+ 
+     if (!data.user) {
+       router.push(`/login?redirect=${encodeURIComponent(pathname)}`)
+       return
+     }
     const next = new Set(favorites)
     const isAdding = !next.has(id)
     

@@ -3,6 +3,9 @@
 import { useState, useEffect, useMemo } from "react"
 import { ServiceListingCard } from "./service-listing-card"
 import { toggleFavoriteAction, fetchUserFavorites } from "@/lib/favorites-actions"
+import { usePathname, useRouter } from "next/navigation"
+import { supabase } from "@/lib/supabase"
+
 
 interface FeaturedVendorsSectionProps {
   initialVendors: any[]
@@ -12,6 +15,9 @@ export function FeaturedVendorsSectionClient({ initialVendors }: { initialVendor
   // 1. State za favorite i mounted
   const [mounted, setMounted] = useState(false)
   const [favorites, setFavorites] = useState<Set<string>>(new Set())
+
+  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     setMounted(true)
@@ -34,7 +40,13 @@ export function FeaturedVendorsSectionClient({ initialVendors }: { initialVendor
     syncWithDB()
   }, [])
 
-  const handleFavorite = (id: string) => {
+  const handleFavorite = async (id: string) => {
+    const { data } = await supabase.auth.getUser()
+ 
+     if (!data.user) {
+       router.push(`/login?redirect=${encodeURIComponent(pathname)}`)
+       return
+     }
     const next = new Set(favorites)
     const isAdding = !next.has(id)
     

@@ -1,11 +1,14 @@
 "use client"
 
-import { useState } from "react"
+import { useSearchParams, useRouter } from "next/navigation"
 import { supabase } from "@/lib/supabase"
-import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 export default function LoginPage() {
+  const searchParams = useSearchParams()
   const router = useRouter()
+
+  const redirectTo = searchParams.get("redirect") || "/"
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -24,10 +27,11 @@ export default function LoginPage() {
     if (error) {
       setError(error.message)
     } else {
-      router.push("/") // redirect nakon logina
+      router.replace(redirectTo) // redirect nakon logina
     }
 
     setLoading(false)
+
   }
 
   const handleSignup = async () => {
@@ -46,6 +50,7 @@ export default function LoginPage() {
     }
 
     setLoading(false)
+    router.replace(redirectTo)
   }
 
   return (

@@ -6,8 +6,6 @@ import { useRouter } from "next/navigation"
 
 import { ServiceListing } from "@data/listings"
 
-
-
 interface ServiceListingCardProps {
   listing: ServiceListing
   onFavorite?: (id: string) => void
