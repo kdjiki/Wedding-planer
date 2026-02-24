@@ -1,16 +1,41 @@
 "use client"
-import { Page } from "../navigationData"
-import "../globals.css"
-
 import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
+import { useEffect } from "react"
+
+import { Page } from "../navigationData"
+import { supabase } from "@/lib/supabase" 
+import "../globals.css"
 
 export function Navigation({ pages }: { pages: Page[] }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<any>(null)
   const pathname = usePathname();
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data } = await supabase.auth.getUser()
+      setUser(data.user)
+    }
+    getUser()
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null)
+      }
+    )
+    return () => {
+      listener.subscription.unsubscribe()
+    }
+  }, [])
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+    setUser(null)
+    window.location.reload()
+  }
 
   return (
    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-white/20">
@@ -53,11 +78,21 @@ export function Navigation({ pages }: { pages: Page[] }) {
                   )}
                 </Link>
               )})}
-            <button className="px-6 py-2 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium cursor-pointer">
-              <a href="/login">
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="px-6 py-2 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="px-6 py-2 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium"
+              >
                 Login
-              </a>
-            </button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -92,11 +127,22 @@ export function Navigation({ pages }: { pages: Page[] }) {
                 {link.title}
               </Link>
             )})}
-            <button className="w-full px-6 py-2 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium">
-              <a href="/login">
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="w-full px-6 py-2 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="block w-full px-6 py-2 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium text-center"
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 Login
-              </a>
-            </button>
+              </Link>
+            )}
           </div>
         </div>
       )}
