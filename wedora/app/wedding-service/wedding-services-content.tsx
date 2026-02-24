@@ -123,7 +123,7 @@ export default function WeddingServicesContent({
           <CategoryQuickLinks />
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-3 mb-6">
+        <div className="flex flex-wrap sm:flex-row gap-3 mb-6">
           <div className="flex-1">
             <SearchBar onSearch={setSearchQuery} />
           </div>

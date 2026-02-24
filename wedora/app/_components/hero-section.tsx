@@ -76,25 +76,26 @@ export function HeroSection() {
             {/* Search Bar */}
             <div className="bg-white dark:bg-[#1E1E1E] border-2 border-[#E0E0E0] dark:border-[#2D2D2D] rounded-xl p-4 shadow-lg ">
               <div className="grid sm:grid-cols-3 gap-4 mb-4">
-                <div className="flex items-center bg-[#F5F5F5] dark:bg-[#121212] rounded-lg cursor-pointer">
+                {/* select service */}
+                <div className="flex items-center bg-[#F5F5F5] dark:bg-[#121212] rounded-lg cursor-pointer ">
                   <Select
                     selectedKeys={selectedService}
                     onSelectionChange={setSelectedService}
                     renderValue={() => selectedValue || "Service Type"}
-                    placeholder="Service Type"
+                    label="Service Type"
                     className="bg-transparent outline-none w-full text-sm text-[#1A1A1Ab8] dark:text-white placeholder:text-[#666666] dark:placeholder:text-[#B0B0B0]"
                     classNames={{
-                      selectorIcon: "absolute right-3 top-1/2 -translate-y-1/2 text-[#666666] dark:text-[#B0B0B0]",
-                      value: "justify-start text-left",
-                      trigger: "justify-start",
-                    }}
+                        trigger: " h-12 min-h-12 bg-transparent border-none shadow-none hover:bg-transparent flex items-center justify-center",
+                        value: "text-center text-sm font-medium text-[#1A1A1A] dark:text-white !p-0",
+                        selectorIcon: "absolute right-3 top-1/2 -translate-y-1/2 text-[#666666] dark:text-[#B0B0B0]",
+                      }}
                     >
                     <SelectSection className="bg-[#F5F5F5] dark:bg-[#121212] rounded-lg">
                     {services.map((service) => (
                       
                       <SelectItem key={service.id}  textValue={service.title} className="gap-2 px-2 py-1 hover:bg-[#E0E0E0] dark:hover:bg-[#2D2D2D] rounded-md flex ">
                         <div className="flex items-center gap-2 text-[#1A1A1A] dark:text-white justify-start">
-                            {service.icon && <service.icon size={14} />}
+                            {service.icon && <service.icon size={16} className="text-[#666666] dark:text-[#B0B0B0]" />}
                             <span className="flex justify-start">{service.title}</span>
                           </div>
                         </SelectItem>
@@ -110,10 +111,13 @@ export function HeroSection() {
                     onSelectionChange={setSelectedLocation}
                     renderValue={() => selectedLocationValue || "Location"}
                     selectorIcon={<MapPin size={16} className="text-[#666666] dark:text-[#B0B0B0]" />}
-                    placeholder="Location"
+                    label="Location"
                     className="bg-transparent outline-none justify-start w-full text-sm text-[#1A1A1Ab8] dark:text-white placeholder:text-[#666666] dark:placeholder:text-[#B0B0B0]"
-                    classNames={{
-                      selectorIcon: "absolute right-3 top-1/2 -translate-y-1/2 text-[#666666] dark:text-[#B0B0B0]",                    }}
+                     classNames={{
+                        trigger: " h-12 min-h-12 bg-transparent border-none shadow-none hover:bg-transparent flex items-center justify-center",
+                        value: "text-center text-sm font-medium text-[#1A1A1A] dark:text-white !p-0",
+                        selectorIcon: "absolute right-3 top-1/2 -translate-y-1/2 text-[#666666] dark:text-[#B0B0B0]",
+                      }}
                     >
                     <SelectSection className="bg-[#F5F5F5] dark:bg-[#121212] rounded-lg ">
                     {location.map((location) => (

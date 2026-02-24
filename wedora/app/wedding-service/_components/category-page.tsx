@@ -81,7 +81,7 @@ export function CategoryPage({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Search + Sort */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-6">
+        <div className="flex flex-wrap sm:flex-row gap-3 mb-6">
           <div className="flex-1">
             <SearchBar onSearch={setSearchQuery} showFilterButton={false} />
           </div>
