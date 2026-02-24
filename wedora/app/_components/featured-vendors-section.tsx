@@ -1,10 +1,10 @@
 import { db } from "@/db"
 import { serviceListings } from "@/db/schema"
-import { desc, inArray } from "drizzle-orm"
-import { ServiceListingCard } from "./service-listing-card"
+import { desc } from "drizzle-orm"
+import {FeaturedVendorsSectionClient} from "./featured-vendors-section-client"
 
 export async function FeaturedVendorsSection() {
-  // Dohvati 4 najbolje ocijenjena iz određenih kategorija
+  // fetch top-rated vendore iz baze (limit 4)
   const vendors = await db
     .select()
     .from(serviceListings)
@@ -20,20 +20,7 @@ export async function FeaturedVendorsSection() {
           </h2>
           <p className="text-lg text-[#666666] dark:text-[#B0B0B0]">Trusted by couples everywhere</p>
         </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {vendors.map((vendor) => (
-              <ServiceListingCard key={vendor.id} listing={vendor} />
-          ))}
-        </div>
-
-        <div className="text-center">
-          <a href="/wedding-service">
-            <button className="px-8 py-3 bg-[#FF69B4] text-white rounded-lg hover:bg-[#FF1493] transition-colors font-medium cursor-pointer">
-                View All Vendors
-            </button>
-          </a>
-        </div>
+        <FeaturedVendorsSectionClient initialVendors={vendors} />
       </div>
     </section>
   )
