@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo} from "react" // Dodan Suspense
+import { useState, useMemo } from "react"
 import { useSearchParams } from "next/navigation"
 import { Sparkles } from "lucide-react"
 
@@ -8,11 +8,15 @@ import { SearchBar } from "./_components/search-bar"
 import { ServiceListingCard } from "../_components/service-listing-card"
 import { CategoryQuickLinks } from "./_components/category-quick-links"
 import { SortDropdown } from "./_components/sort-dropdown"
-import { allListings } from "../_data/listings"
 import { BackButton } from "../_components/back-button"
+import { ServiceListing } from "@data/listings"
 
-// 1. Ovdje ide tvoja glavna logika (Content komponenta)
-export default function WeddingServicesContent() {
+
+export default function WeddingServicesContent({
+  initialListings,
+}: {
+  initialListings: ServiceListing[]
+}) {
   const searchParams = useSearchParams()
 
   const urlLocation = searchParams.get("location")
@@ -22,31 +26,27 @@ export default function WeddingServicesContent() {
   const [sortBy, setSortBy] = useState("recommended")
   const [visibleCount, setVisibleCount] = useState(8)
 
-  const [favorites, setFavorites] = useState<Set<string>>(
-    new Set(allListings.filter((l) => l.isFavorited).map((l) => l.id))
-  )
+  const [favorites, setFavorites] = useState<Set<string>>(new Set())
 
   const handleFavorite = (id: string) => {
     setFavorites((prev) => {
       const next = new Set(prev)
-      if (next.has(id)) {
-        next.delete(id)
-      } else {
-        next.add(id)
-      }
+      next.has(id) ? next.delete(id) : next.add(id)
       return next
     })
   }
 
   const filteredListings = useMemo(() => {
-    let results = allListings.map((l) => ({
+    let results = initialListings.map((l) => ({
       ...l,
       isFavorited: favorites.has(l.id),
     }))
 
     /* ---------------- URL FILTERS ---------------- */
     if (urlLocation) {
-      results = results.filter((l) => l.location.toLowerCase() === urlLocation.toLowerCase())
+      results = results.filter(
+        (l) => l.location.toLowerCase() === urlLocation.toLowerCase()
+      )
     }
 
     if (urlDate) {
@@ -98,13 +98,12 @@ export default function WeddingServicesContent() {
     }
 
     return results
-  }, [searchQuery, sortBy, favorites, urlLocation, urlDate])
+  }, [initialListings, searchQuery, sortBy, favorites, urlLocation, urlDate])
 
   const visibleListings = filteredListings.slice(0, visibleCount)
 
   return (
     <div className="pt-16">
-      {/* HEADER */}
       <section className="bg-white dark:bg-[#1E1E1E] border-b border-[#E0E0E0] dark:border-[#2D2D2D]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           <BackButton />
@@ -116,19 +115,14 @@ export default function WeddingServicesContent() {
               Wedding Services
             </h1>
           </div>
-          <p className="text-lg text-[#666666] dark:text-[#B0B0B0]">
-            Browse and book everything you need for your perfect wedding day, from venues to photographers, all in one place.
-          </p>
         </div>
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* CATEGORY LINKS */}
         <div className="mb-6">
           <CategoryQuickLinks />
         </div>
 
-        {/* SEARCH + SORT */}
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <div className="flex-1">
             <SearchBar onSearch={setSearchQuery} />
@@ -136,7 +130,6 @@ export default function WeddingServicesContent() {
           <SortDropdown value={sortBy} onChange={setSortBy} />
         </div>
 
-        {/* RESULTS COUNT */}
         <div className="mb-5">
           <p className="text-sm text-[#666666] dark:text-[#B0B0B0]">
             <span className="font-semibold text-[#1A1A1A] dark:text-white">
@@ -146,7 +139,6 @@ export default function WeddingServicesContent() {
           </p>
         </div>
 
-        {/* GRID */}
         {filteredListings.length > 0 ? (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
