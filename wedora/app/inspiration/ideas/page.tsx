@@ -1,41 +1,34 @@
-import Link from "next/link"
+import { Lightbulb } from "lucide-react"
+import { InspirationQuickLinks } from "../_components/inspiration-quick-links"
+import { IdeasContent } from "../_components/ideas-content"
+import { CtaSection } from "@/app/_components/cta-section"
 
-type Post = {
-  id: number
-  title: string
-  body: string
-}
-
-export default async function Ideas() {
-  const res = await fetch(
-    "https://jsonplaceholder.typicode.com/posts",
-    { cache: "no-store" } // server-side
-  )
-
-  const posts: Post[] = await res.json()
-
-  const ideas = posts.slice(30, 40) // simulacija kategorije
-
+export default function IdeasPage() {
   return (
-    <section className="max-w-5xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold mb-8">Ideas page</h1>
+    <div className="pt-16">
+      <section className="bg-white dark:bg-[#1E1E1E] border-b border-[#E0E0E0] dark:border-[#2D2D2D]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-10 h-10 bg-[#FFB6C1]/20 dark:bg-[#FF69B4]/20 rounded-full flex items-center justify-center">
+              <Lightbulb size={20} className="text-[#FF69B4]" />
+            </div>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1A1A1A] dark:text-white text-balance">
+              Ideas
+            </h1>
+          </div>
+          <p className="text-[#666666] dark:text-[#B0B0B0] text-sm sm:text-base leading-relaxed max-w-2xl ml-[52px]">
+            Décor, themes, color palettes, and real wedding inspiration to spark your vision.
+          </p>
+        </div>
+      </section>
 
-      <div className="space-y-6">
-        {ideas.map((post) => (
-          <Link
-            key={post.id}
-            href={`/inspiration/ideas/${post.id}`}
-            className="block p-6 border rounded-lg hover:shadow-md transition"
-          >
-            <h2 className="text-xl font-semibold mb-2">
-              {post.title}
-            </h2>
-            <p className="text-gray-600 line-clamp-2">
-              {post.body}
-            </p>
-          </Link>
-        ))}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div className="mb-6">
+          <InspirationQuickLinks />
+        </div>
+        <IdeasContent />
       </div>
-    </section>
+      <CtaSection/>
+    </div>
   )
 }

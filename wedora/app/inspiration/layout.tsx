@@ -1,17 +1,11 @@
-import { inspirationPages } from "../navigationData"
-import { SubNavigation } from "../_components/subnavigation"
-
 export default function InspirationLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <>
-      <SubNavigation pages={inspirationPages} />
-      <main className="pt-4">
-        {children}
-      </main>
-    </>
+    <main className="min-h-screen bg-[#F5F5F5] dark:bg-[#121212]">
+      {children}
+    </main>
   )
 }
