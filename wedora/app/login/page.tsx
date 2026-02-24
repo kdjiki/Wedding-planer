@@ -1,18 +1,96 @@
+"use client"
 
+import { useState } from "react"
+import { supabase } from "@/lib/supabase"
+import { useRouter } from "next/navigation"
 
-export default function LoginPage ()
-{
-    return (
-        <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">  
-            <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-                <h1 className="text-4xl font-extrabold text-zinc-900 dark:text-zinc-100 sm:text-5xl">
-                    Login
-                </h1>
-                <p className="mt-4 text-lg text-zinc-700 dark:text-zinc-300">
-                    Login or create account.
-                </p>
-            </main>
-        </div>
-    );
+export default function LoginPage() {
+  const router = useRouter()
 
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const handleLogin = async () => {
+    setLoading(true)
+    setError(null)
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    if (error) {
+      setError(error.message)
+    } else {
+      router.push("/") // redirect nakon logina
+    }
+
+    setLoading(false)
+  }
+
+  const handleSignup = async () => {
+    setLoading(true)
+    setError(null)
+
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+    })
+
+    if (error) {
+      setError(error.message)
+    } else {
+      alert("Check your email for confirmation link.")
+    }
+
+    setLoading(false)
+  }
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black">
+      <div className="w-full max-w-md bg-white dark:bg-zinc-900 p-8 rounded-xl shadow">
+        <h1 className="text-3xl font-bold mb-6 text-center">
+          Login
+        </h1>
+
+        <input
+          type="email"
+          placeholder="Email"
+          className="w-full mb-3 p-3 rounded border dark:bg-zinc-800"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          className="w-full mb-4 p-3 rounded border dark:bg-zinc-800"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        {error && (
+          <p className="text-red-500 text-sm mb-3">{error}</p>
+        )}
+
+        <button
+          onClick={handleLogin}
+          disabled={loading}
+          className="w-full bg-pink-500 text-white py-3 rounded mb-3 hover:bg-pink-600"
+        >
+          {loading ? "Loading..." : "Login"}
+        </button>
+
+        <button
+          onClick={handleSignup}
+          disabled={loading}
+          className="w-full border py-3 rounded"
+        >
+          Create Account
+        </button>
+      </div>
+    </div>
+  )
 }
