@@ -92,13 +92,11 @@ export function IdeasContent() {
                   ? "tall"
                   : "default"
             const gridClass =
-              size === "large"
-                ? "sm:col-span-2 sm:row-span-2 h-full min-h-0"
-                : size === "wide"
-                  ? "sm:col-span-2"
-                  : size === "tall"
-                    ? "sm:row-span-2 h-full min-h-0"
-                    : ""
+              size === "wide"
+                ? "sm:col-span-2"
+                : size === "tall"
+                  ? "sm:row-span-2 h-full min-h-0"
+                  : ""
             return (
               <div key={idea.id} className={gridClass}>
                 <IdeaCard idea={idea} size={size} />
