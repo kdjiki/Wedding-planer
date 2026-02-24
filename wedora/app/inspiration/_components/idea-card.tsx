@@ -16,7 +16,9 @@ export function IdeaCard({ idea, size = "default" }: { idea: WeddingIdea; size?:
   return (
     <Link
       href={`/inspiration/ideas/${idea.id}`}
-      className={`group block rounded-xl overflow-hidden hover:opacity-95 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#FF69B4] focus:ring-offset-2 focus:ring-offset-[#F5F5F5] dark:focus:ring-offset-[#121212] ${fillsCell ? "h-full flex flex-col" : ""}`}
+      className={`group block rounded-xl overflow-hidden border border-[#E0E0E0] dark:border-[#2D2D2D] hover:border-[#FF69B4] hover:shadow-lg hover:opacity-95 transition-all focus:outline-none focus:ring-2 focus:ring-[#FF69B4] focus:ring-offset-2 focus:ring-offset-[#F5F5F5] dark:focus:ring-offset-[#121212] ${
+        fillsCell ? "h-full flex flex-col" : ""
+      }`}
     >
       <div
         className={`relative w-full overflow-hidden ${fillsCell ? "flex-1 min-h-[160px]" : ""} ${aspectClass}`}
@@ -29,7 +31,7 @@ export function IdeaCard({ idea, size = "default" }: { idea: WeddingIdea; size?:
           className="object-cover group-hover:scale-105 transition-transform duration-300"
         />
       </div>
-      <div className="pt-3 shrink-0">
+      <div className="pt-3 pb-4 px-4 sm:px-5 shrink-0">
         <h3 className="font-semibold text-[#1A1A1A] dark:text-white mb-0.5 line-clamp-1">
           {idea.title}
         </h3>

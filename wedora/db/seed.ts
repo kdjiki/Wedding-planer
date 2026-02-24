@@ -1,5 +1,22 @@
 import { db } from "./index"
+<<<<<<< Updated upstream
 import { serviceListings, serviceTags, bookings } from "./schema"
+=======
+import {
+  serviceListings,
+  serviceTags,
+  bookings,
+  weddingIdeas,
+  guideArticles,
+  realWeddingStories,
+} from "./schema"
+import { WEDDING_IDEAS } from "@/app/inspiration/_data/wedding-ideas"
+import {
+  FEATURED_GUIDE,
+  GUIDE_ARTICLES,
+  REAL_WEDDING_STORIES,
+} from "@/app/inspiration/_data/guides-and-stories"
+>>>>>>> Stashed changes
 
 const BASE_URL =
   "https://sxutxqfwyxzlgsnvonvr.supabase.co/storage/v1/object/public/services"
@@ -138,6 +155,90 @@ async function seed() {
         tag,
       })
     }
+<<<<<<< Updated upstream
+=======
+
+    // 3️⃣ Insert bookings
+    const datesMap = [
+      ["2026-09-15", "2026-10-20"],
+      ["2026-11-05", "2026-12-15"],
+      ["2026-08-10", "2026-09-25"],
+      ["2026-07-15", "2026-08-30"],
+      ["2026-10-01", "2026-11-15"],
+      ["2026-09-20", "2026-10-30"],
+      ["2026-08-01", "2026-09-15"],
+      ["2026-07-20", "2026-08-25"],
+      ["2026-09-10", "2026-10-20"],
+      ["2026-08-15", "2026-09-30"],
+    ]
+
+    for (let i = 0; i < insertedListings.length; i++) {
+      for (const date of datesMap[i]) {
+        await db.insert(bookings).values({
+          serviceId: insertedListings[i].id,
+          bookedDate: new Date(date),
+        }).onConflictDoNothing()
+      }
+    }
+
+    // 4️⃣ Insert wedding ideas (SADA JE UNUTAR seed())
+    await db
+      .insert(weddingIdeas)
+      .values(
+        WEDDING_IDEAS.map((idea) => ({
+          id: idea.id,
+          title: idea.title,
+          description: idea.description,
+          image: idea.image,
+          category: idea.category,
+        }))
+      )
+      .onConflictDoNothing()
+
+    // 5️⃣ Insert guide articles (featured + regular)
+    await db
+      .insert(guideArticles)
+      .values(
+        [FEATURED_GUIDE, ...GUIDE_ARTICLES].map((article) => ({
+          id: article.id,
+          tag: article.tag,
+          category: article.category,
+          title: article.title,
+          description: article.description,
+          readTime: article.readTime,
+          image: article.image,
+        }))
+      )
+      .onConflictDoNothing()
+
+    // 6️⃣ Insert real wedding stories
+    await db
+      .insert(realWeddingStories)
+      .values(
+        REAL_WEDDING_STORIES.map((story) => ({
+          id: story.id,
+          tag: story.tag,
+          couple: story.couple,
+          location: story.location,
+          // Map friendly text to a concrete date
+          date:
+            story.id === "sarah-michael-napa-valley"
+              ? new Date("2025-06-01")
+              : new Date("2025-09-01"),
+          guests: story.guests,
+          description: story.description,
+          image: story.image,
+        }))
+      )
+      .onConflictDoNothing()
+
+    console.log("✅ Database seeded successfully!")
+    process.exit(0)
+
+  } catch (err) {
+    console.error("❌ Seeding failed:", err)
+    process.exit(1)
+>>>>>>> Stashed changes
   }
 
   // 3️⃣ Insert booked dates
