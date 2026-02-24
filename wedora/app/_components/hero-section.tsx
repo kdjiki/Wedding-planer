@@ -82,7 +82,8 @@ export function HeroSection() {
                     selectedKeys={selectedService}
                     onSelectionChange={setSelectedService}
                     renderValue={() => selectedValue || "Service Type"}
-                    label="Service Type"
+                    placeholder="Service Type"
+                    aria-label="Service Type"
                     className="bg-transparent outline-none w-full text-sm text-[#1A1A1Ab8] dark:text-white placeholder:text-[#666666] dark:placeholder:text-[#B0B0B0]"
                     classNames={{
                         trigger: " h-12 min-h-12 bg-transparent border-none shadow-none hover:bg-transparent flex items-center justify-center",
@@ -111,7 +112,8 @@ export function HeroSection() {
                     onSelectionChange={setSelectedLocation}
                     renderValue={() => selectedLocationValue || "Location"}
                     selectorIcon={<MapPin size={16} className="text-[#666666] dark:text-[#B0B0B0]" />}
-                    label="Location"
+                    placeholder="Location"
+                    aria-label="Location"
                     className="bg-transparent outline-none justify-start w-full text-sm text-[#1A1A1Ab8] dark:text-white placeholder:text-[#666666] dark:placeholder:text-[#B0B0B0]"
                      classNames={{
                         trigger: " h-12 min-h-12 bg-transparent border-none shadow-none hover:bg-transparent flex items-center justify-center",
