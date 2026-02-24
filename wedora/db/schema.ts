@@ -91,3 +91,17 @@ export const servicesRelations = relations(serviceListings, ({ many }) => ({
 export const usersRelations = relations(users, ({ many }) => ({
   favorites: many(favorites),
 }))
+
+export const bookingsRelations = relations(bookings, ({ one }) => ({
+  service: one(serviceListings, {
+    fields: [bookings.serviceId],
+    references: [serviceListings.id],
+  }),
+}))
+
+export const serviceTagsRelations = relations(serviceTags, ({ one }) => ({
+  service: one(serviceListings, {
+    fields: [serviceTags.listingId],
+    references: [serviceListings.id],
+  }),
+}))
