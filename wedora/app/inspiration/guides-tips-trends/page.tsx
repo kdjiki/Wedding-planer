@@ -3,14 +3,46 @@ import { InspirationQuickLinks } from "../_components/inspiration-quick-links";
 import { GuideFeaturedCard } from "../_components/guide-featured-card";
 import { GuideSmallCard } from "../_components/guide-small-card";
 import { RealWeddingCard } from "../_components/real-wedding-card";
+import { CtaSection } from "@/app/_components/cta-section";
+import { db } from "@/db";
+import { realWeddingStories } from "@/db/schema";
 import {
   FEATURED_GUIDE,
   GUIDE_ARTICLES,
   REAL_WEDDING_STORIES,
+  type GuideArticle,
+  type RealWeddingStory,
 } from "../_data/guides-and-stories";
-import { CtaSection } from "@/app/_components/cta-section";
 
-export default function GuidesTipsTrendsPage() {
+export default async function GuidesTipsTrendsPage() {
+  let storiesFromDb: { id: string; tag: string; couple: string; location: string; date: Date; guests: number; description: string; image: string }[] = [];
+  try {
+    storiesFromDb = await db.select().from(realWeddingStories);
+  } catch {
+    // Fallback when DB unavailable (e.g. connection pool limit)
+  }
+
+  const featuredGuide: GuideArticle = FEATURED_GUIDE;
+  const guideArticlesMapped: GuideArticle[] = GUIDE_ARTICLES;
+
+  const realWeddingStoriesMapped: RealWeddingStory[] =
+    storiesFromDb.length === 0
+      ? REAL_WEDDING_STORIES
+      : storiesFromDb.map((story) => ({
+          id: story.id,
+          tag: story.tag,
+          couple: story.couple,
+          location: story.location,
+          date: story.date.toLocaleString("default", {
+            month: "long",
+            year: "numeric",
+          }),
+          guests: story.guests,
+          description: story.description,
+          image: story.image,
+        }));
+
+
   return (
     <div className="pt-16">
       <section className="bg-white dark:bg-[#1E1E1E] border-b border-[#E0E0E0] dark:border-[#2D2D2D]">
@@ -36,29 +68,35 @@ export default function GuidesTipsTrendsPage() {
         </div>
 
         {/* Guides, Tips & Trends section */}
-        <section className="mb-12">
-          <div className="mb-6">
-            <GuideFeaturedCard article={FEATURED_GUIDE} />
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
-            {GUIDE_ARTICLES.map((article) => (
-              <GuideSmallCard key={article.id} article={article} />
-            ))}
-          </div>
-        </section>
+        {featuredGuide && (
+          <section className="mb-12">
+            <div className="mb-6">
+              <GuideFeaturedCard article={featuredGuide} />
+            </div>
+            {guideArticlesMapped.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
+                {guideArticlesMapped.map((article) => (
+                  <GuideSmallCard key={article.id} article={article} />
+                ))}
+              </div>
+            )}
+          </section>
+        )}
 
         {/* Real Wedding Stories section */}
-        <section>
-          <h2 className="flex items-center gap-2 text-xl font-bold text-[#1A1A1A] dark:text-white mb-6">
-            <Heart size={20} className="text-[#FF69B4]" />
-            Real Wedding Stories
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-            {REAL_WEDDING_STORIES.map((story) => (
-              <RealWeddingCard key={story.id} story={story} />
-            ))}
-          </div>
-        </section>
+        {realWeddingStoriesMapped.length > 0 && (
+          <section>
+            <h2 className="flex items-center gap-2 text-xl font-bold text-[#1A1A1A] dark:text-white mb-6">
+              <Heart size={20} className="text-[#FF69B4]" />
+              Real Wedding Stories
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+              {realWeddingStoriesMapped.map((story) => (
+                <RealWeddingCard key={story.id} story={story} />
+              ))}
+            </div>
+          </section>
+        )}
       </div>
       <CtaSection/>
     </div>

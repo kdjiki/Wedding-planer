@@ -2,8 +2,18 @@ import { Lightbulb } from "lucide-react"
 import { InspirationQuickLinks } from "../_components/inspiration-quick-links"
 import { IdeasContent } from "../_components/ideas-content"
 import { CtaSection } from "@/app/_components/cta-section"
+import { db } from "@/db"
+import { weddingIdeas } from "@/db/schema"
+import { WEDDING_IDEAS } from "../_data/wedding-ideas"
 
-export default function IdeasPage() {
+export default async function IdeasPage() {
+  let ideas: { id: string; title: string; description: string; image: string; category: string }[]
+  try {
+    ideas = await db.select().from(weddingIdeas)
+  } catch {
+    ideas = WEDDING_IDEAS
+  }
+
   return (
     <div className="pt-16">
       <section className="bg-white dark:bg-[#1E1E1E] border-b border-[#E0E0E0] dark:border-[#2D2D2D]">
@@ -26,7 +36,7 @@ export default function IdeasPage() {
         <div className="mb-6">
           <InspirationQuickLinks />
         </div>
-        <IdeasContent />
+        <IdeasContent initialIdeas={ideas} />
       </div>
       <CtaSection/>
     </div>

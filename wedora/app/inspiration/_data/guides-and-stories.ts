@@ -89,3 +89,4 @@ export const REAL_WEDDING_STORIES: RealWeddingStory[] = [
     image: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600",
   },
 ]
+

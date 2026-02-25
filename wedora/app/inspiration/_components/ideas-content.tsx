@@ -1,21 +1,25 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Search } from "lucide-react"
 import {
-  WEDDING_IDEAS,
   IDEA_CATEGORIES,
   type IdeaCategory,
 } from "../_data/wedding-ideas"
 import { IdeaCard } from "./idea-card"
+import type { WeddingIdea } from "../_data/wedding-ideas"
 
-export function IdeasContent() {
+const INITIAL_VISIBLE = 8
+const LOAD_MORE_STEP = 8
+
+export function IdeasContent({ initialIdeas }: { initialIdeas: WeddingIdea[] }) {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] =
     useState<IdeaCategory>("All")
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE)
 
   const filteredIdeas = useMemo(() => {
-    let list = WEDDING_IDEAS
+    let list = initialIdeas
     if (selectedCategory !== "All") {
       list = list.filter(
         (idea) =>
@@ -32,7 +36,14 @@ export function IdeasContent() {
       )
     }
     return list
+  }, [searchQuery, selectedCategory, initialIdeas])
+
+  useEffect(() => {
+    setVisibleCount(INITIAL_VISIBLE)
   }, [searchQuery, selectedCategory])
+
+  const visibleIdeas = filteredIdeas.slice(0, visibleCount)
+  const hasMore = visibleCount < filteredIdeas.length
 
   return (
     <>
@@ -65,7 +76,7 @@ export function IdeasContent() {
                 key={cat}
                 type="button"
                 onClick={() => setSelectedCategory(cat)}
-                className={`shrink-0 px-4 py-2.5 rounded-full text-sm font-medium transition-colors ${
+                className={`shrink-0 px-4 py-2.5 rounded-full text-sm font-medium transition-colors cursor-pointer ${
                   isActive
                     ? "bg-[#FF69B4] text-white dark:bg-[#FF1493]"
                     : "bg-white dark:bg-[#1E1E1E] border border-[#E0E0E0] dark:border-[#2D2D2D] text-[#1A1A1A] dark:text-white hover:border-[#FFB6C1] dark:hover:border-[#FF69B4]"
@@ -78,32 +89,29 @@ export function IdeasContent() {
         </div>
       </div>
 
-      {/* Image card grid – varied sizes, no borders */}
+      {/* Image card grid */}
       {filteredIdeas.length > 0 ? (
-        <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
-          style={{ gridAutoRows: "minmax(160px, auto)" }}
-        >
-          {filteredIdeas.map((idea, index) => {
-            const size =
-              index % 8 === 0
-                ? "wide"
-                : index % 8 === 4
-                  ? "tall"
-                  : "default"
-            const gridClass =
-              size === "wide"
-                ? "sm:col-span-2"
-                : size === "tall"
-                  ? "sm:row-span-2 h-full min-h-0"
-                  : ""
-            return (
-              <div key={idea.id} className={gridClass}>
-                <IdeaCard idea={idea} size={size} />
-              </div>
-            )
-          })}
-        </div>
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {visibleIdeas.map((idea, index) => {
+              const size = index % 5 === 3 ? "tall" : "default"
+              return (
+                <IdeaCard key={idea.id} idea={idea} size={size} />
+              )
+            })}
+          </div>
+          {hasMore && (
+            <div className="text-center mt-10">
+              <button
+                type="button"
+                onClick={() => setVisibleCount((prev) => prev + LOAD_MORE_STEP)}
+                className="cursor-pointer px-8 py-3 border-2 border-[#FF69B4] text-[#FF69B4] rounded-xl font-medium hover:bg-[#FF69B4] hover:text-white transition-colors"
+              >
+                View more
+              </button>
+            </div>
+          )}
+        </>
       ) : (
         <div className="text-center py-16">
           <p className="text-[#666666] dark:text-[#B0B0B0]">

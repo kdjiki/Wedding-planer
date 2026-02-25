@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import { Tag } from "lucide-react" 
+import { db } from "@/db"
+import { weddingIdeas } from "@/db/schema"
+import { eq } from "drizzle-orm"
 
-import { WEDDING_IDEAS } from "../../_data/wedding-ideas"
 import { BackButton } from "@/app/_components/back-button"
 
 export default async function IdeaDetailPage({
@@ -11,7 +13,10 @@ export default async function IdeaDetailPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const idea = WEDDING_IDEAS.find((i) => i.id === id)
+
+  const idea = await db.query.weddingIdeas.findFirst({
+    where: eq(weddingIdeas.id, id),
+  })
 
   if (!idea) {
     notFound()
