@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 
 import { Page } from "../navigationData"
 import { supabase } from "@/lib/supabase" 
@@ -14,6 +15,7 @@ export function Navigation({ pages }: { pages: Page[] }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<any>(null)
   const pathname = usePathname();
+  const router = useRouter()
 
   useEffect(() => {
     const getUser = async () => {
@@ -35,7 +37,11 @@ export function Navigation({ pages }: { pages: Page[] }) {
     await supabase.auth.signOut()
     setUser(null)
     window.location.reload()
-  }
+     localStorage.removeItem("wedding_favs")
+
+    router.refresh()
+    router.push("/")
+    }
 
   return (
    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-white/20">
