@@ -21,7 +21,7 @@ async function seed() {
   try {
     console.log("🌱 Seeding database...")
 
-    // 1️⃣ Insert listings
+    // 1️⃣ Insert service listings
     const insertedListings = await db
       .insert(serviceListings)
       .values([
@@ -32,8 +32,7 @@ async function seed() {
           rating: 4.9,
           location: "Split",
           priceRange: "$3,500",
-          description:
-            "A stunning outdoor garden venue surrounded by rose bushes and ancient oak trees. Perfect for intimate and grand weddings alike.",
+          description: "A stunning outdoor garden venue surrounded by rose bushes and ancient oak trees. Perfect for intimate and grand weddings alike.",
         },
         {
           name: "Grand Ballroom Venue",
@@ -42,8 +41,7 @@ async function seed() {
           rating: 4.0,
           location: "Zagreb",
           priceRange: "$6,000",
-          description:
-            "An opulent ballroom with crystal chandeliers, marble floors, and world-class staff to make your celebration unforgettable.",
+          description: "An opulent ballroom with crystal chandeliers, marble floors, and world-class staff to make your celebration unforgettable.",
         },
         {
           name: "Elegant Events Photography",
@@ -52,8 +50,7 @@ async function seed() {
           rating: 4.9,
           location: "Split",
           priceRange: "$2,500",
-          description:
-            "Award-winning wedding photography that captures every emotion. Candid and editorial styles with a quick turnaround time.",
+          description: "Award-winning wedding photography that captures every emotion. Candid and editorial styles with a quick turnaround time.",
         },
         {
           name: "Gourmet Catering Co.",
@@ -62,8 +59,7 @@ async function seed() {
           rating: 4.7,
           location: "Sarajevo",
           priceRange: "$75/person",
-          description:
-            "Exquisite multi-course menus crafted by our Michelin-trained chefs. From hors d'oeuvres to custom wedding cakes.",
+          description: "Exquisite multi-course menus crafted by our Michelin-trained chefs. From hors d'oeuvres to custom wedding cakes.",
         },
         {
           name: "Harmony Wedding Band",
@@ -72,8 +68,7 @@ async function seed() {
           rating: 4.8,
           location: "Zadar",
           priceRange: "$3,200",
-          description:
-            "A 7-piece live band specializing in wedding receptions. From jazz cocktail hours to dance floor hits that keep guests moving.",
+          description: "A 7-piece live band specializing in wedding receptions. From jazz cocktail hours to dance floor hits that keep guests moving.",
         },
         {
           name: "Bloom & Petal Designs",
@@ -82,8 +77,7 @@ async function seed() {
           rating: 4.9,
           location: "Banja Luka",
           priceRange: "$1,800",
-          description:
-            "Bespoke floral arrangements and venue styling. From romantic centerpieces to breathtaking ceremony arches.",
+          description: "Bespoke floral arrangements and venue styling. From romantic centerpieces to breathtaking ceremony arches.",
         },
         {
           name: "Dream Day Planners",
@@ -92,8 +86,7 @@ async function seed() {
           rating: 5.0,
           location: "Split",
           priceRange: "$4,500",
-          description:
-            "Full-service wedding planning from start to finish. We handle every detail so you can enjoy the journey to your big day.",
+          description: "Full-service wedding planning from start to finish. We handle every detail so you can enjoy the journey to your big day.",
         },
         {
           name: "Coastal Bliss Weddings",
@@ -102,8 +95,7 @@ async function seed() {
           rating: 4.7,
           location: "Split",
           priceRange: "$4,200",
-          description:
-            "Say your vows with the ocean as your backdrop. Beachfront ceremonies and tented receptions with stunning sunset views.",
+          description: "Say your vows with the ocean as your backdrop. Beachfront ceremonies and tented receptions with stunning sunset views.",
         },
         {
           name: "True Moments Photography",
@@ -112,8 +104,7 @@ async function seed() {
           rating: 4.6,
           location: "Split",
           priceRange: "$2,000",
-          description:
-            "Natural, candid wedding photography that tells your love story. We blend into the background to capture genuine moments.",
+          description: "Natural, candid wedding photography that tells your love story. We blend into the background to capture genuine moments.",
         },
         {
           name: "Feast & Fête Catering",
@@ -122,10 +113,10 @@ async function seed() {
           rating: 4.5,
           location: "Zagreb",
           priceRange: "$60/person",
-          description:
-            "Delicious buffet-style catering with a variety of cuisines. Perfect for casual and semi-formal weddings.",
+          description: "Delicious buffet-style catering with a variety of cuisines. Perfect for casual and semi-formal weddings.",
         },
       ])
+      .onConflictDoNothing()
       .returning({ id: serviceListings.id })
 
     // 2️⃣ Insert tags
@@ -150,7 +141,7 @@ async function seed() {
         await db.insert(serviceTags).values({
           listingId,
           tag,
-        })
+        }).onConflictDoNothing()
       }
     }
 
@@ -216,9 +207,7 @@ async function seed() {
           tag: story.tag,
           couple: story.couple,
           location: story.location,
-          // Map friendly text to a concrete date
-          date:
-            story.id === "sarah-michael-napa-valley"
+          date: story.id === "sarah-michael-napa-valley"
               ? new Date("2025-06-01")
               : new Date("2025-09-01"),
           guests: story.guests,
