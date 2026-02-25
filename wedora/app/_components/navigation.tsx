@@ -57,7 +57,17 @@ export function Navigation({ pages }: { pages: Page[] }) {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {pages
-              .filter((link) => link.title !== "Login")
+              .filter((link) => {
+                  // rm login link from desktop nav, it will be shown as button on the right
+                  if (link.title === "Login") return false;
+                  
+                  // only show "My Account" if user is logged in
+                  if (link.title === "My account") {
+                    return !!user;
+                  }
+                  
+                  return true;
+              })
               .map((link) => {
                 const isActive =
                 pathname === link.path ||
@@ -112,7 +122,17 @@ export function Navigation({ pages }: { pages: Page[] }) {
       {mobileMenuOpen && (
         <div className="md:hidden bg-white dark:bg-[#1E1E1E] border-t border-[#E0E0E0] dark:border-[#2D2D2D]">
           <div className="px-4 py-4 space-y-3">
-            {pages.filter((link) => link.title !== "Login")
+            {pages.filter((link) => {
+                  // rm login link from desktop nav, it will be shown as button on the right
+                  if (link.title === "Login") return false;
+                  
+                  // only show "My Account" if user is logged in
+                  if (link.title === "My account") {
+                    return !!user;
+                  }
+                  
+                  return true;
+              })
             .map((link) => {
                 const isActive =
                 pathname === link.path ||
