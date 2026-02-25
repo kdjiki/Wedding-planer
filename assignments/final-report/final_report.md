@@ -82,17 +82,17 @@ This section shows the app’s performance **on desktop and mobile devices**, wi
 
 ## Desktop Report
 
-![PageSpeed Desktop Report](./Izvjestaj Desktop.png)
+![PageSpeed Desktop Report](Izvjestaj_Desktop.png)
 
-[Download Desktop PDF Report](./PageSpeed Insights Desktop.pdf)
+[Download Desktop PDF Report](PageSpeed_Insights_Desktop.pdf)
 
 ---
 
 ## Mobile Report
 
-![PageSpeed Mobile Report](./Izvjestaj Mobitel.png)
+![PageSpeed Mobile Report](Izvjestaj_Mobitel.png)
 
-[Download Mobile PDF Report](./PageSpeed Insights Mobile.pdf)
+[Download Mobile PDF Report](PageSpeed_Insights_Mobile.pdf)
 
 # Conclusion
 
