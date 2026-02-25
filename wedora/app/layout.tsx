@@ -5,6 +5,7 @@ import { Navigation } from "./_components/navigation";
 import { mainPages } from "./navigationData";
 import "./globals.css";
 import { Footer } from "./_components/footer";
+import { AuthSync } from "./auth-sync";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <AuthSync />
         <Navigation pages={mainPages} />
         {children}
         <Footer />

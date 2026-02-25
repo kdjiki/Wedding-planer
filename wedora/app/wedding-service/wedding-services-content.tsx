@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useMemo } from "react"
-import { useSearchParams } from "next/navigation"
+import { useState, useMemo, useEffect } from "react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Sparkles } from "lucide-react"
 
 import { SearchBar } from "./_components/search-bar"
@@ -9,8 +9,10 @@ import { ServiceListingCard } from "../_components/service-listing-card"
 import { CategoryQuickLinks } from "./_components/category-quick-links"
 import { SortDropdown } from "./_components/sort-dropdown"
 import { BackButton } from "../_components/back-button"
-import { ServiceListing } from "@data/listings"
 
+import { ServiceListing } from "@data/listings"
+import { toggleFavoriteAction, fetchUserFavorites } from "@/lib/favorites-actions"
+import { supabase } from "@/lib/supabase"
 
 export default function WeddingServicesContent({
   initialListings,
@@ -26,20 +28,62 @@ export default function WeddingServicesContent({
   const [sortBy, setSortBy] = useState("recommended")
   const [visibleCount, setVisibleCount] = useState(8)
 
+  // 1. Sprječavanje Hydration Mismatch-a
+  const [mounted, setMounted] = useState(false)
   const [favorites, setFavorites] = useState<Set<string>>(new Set())
+  const router = useRouter()
+  const pathname = usePathname()
 
-  const handleFavorite = (id: string) => {
-    setFavorites((prev) => {
-      const next = new Set(prev)
-      next.has(id) ? next.delete(id) : next.add(id)
-      return next
+  // 2. useEffect koji se pokreće samo na klijentu
+  useEffect(() => {
+    setMounted(true)
+    
+    // Prvo pročitaj lokalno za brzinu
+    const saved = localStorage.getItem("wedding_favs")
+    if (saved) {
+      setFavorites(new Set(JSON.parse(saved)))
+    }
+
+    // Zatim sinkroniziraj s bazom
+    const syncWithDB = async () => {
+      const dbFavs = await fetchUserFavorites()
+      if (dbFavs && dbFavs.length > 0) {
+        const dbSet = new Set(dbFavs)
+        setFavorites(dbSet)
+        localStorage.setItem("wedding_favs", JSON.stringify(dbFavs))
+      }
+    }
+    syncWithDB()
+  }, [])
+
+  // 3. Funkcija za klik (Optimistic UI)
+  const handleFavorite = async (id: string) => {
+    const { data } = await supabase.auth.getUser()
+
+    if (!data.user) {
+      router.push(`/login?redirect=${encodeURIComponent(pathname)}`)
+      return
+    }
+    const next = new Set(favorites)
+    const isAdding = !next.has(id)
+    
+    if (isAdding) next.add(id)
+    else next.delete(id)
+
+    setFavorites(next)
+    localStorage.setItem("wedding_favs", JSON.stringify(Array.from(next)))
+
+    // Pozadinska sinkronizacija
+    toggleFavoriteAction(id, isAdding).catch((err) => {
+      console.error("Sync failed:", err)
     })
   }
 
   const filteredListings = useMemo(() => {
+    // Ako nismo montirani, isFavorited je false za sve (da se poklopi sa serverom)
     let results = initialListings.map((l) => ({
       ...l,
-      isFavorited: favorites.has(l.id),
+      isFavorited: mounted ? favorites.has(l.id) : false,
     }))
 
     /* ---------------- URL FILTERS ---------------- */
@@ -98,7 +142,7 @@ export default function WeddingServicesContent({
     }
 
     return results
-  }, [initialListings, searchQuery, sortBy, favorites, urlLocation, urlDate])
+  }, [initialListings, searchQuery, sortBy, favorites, urlLocation, urlDate, mounted])
 
   const visibleListings = filteredListings.slice(0, visibleCount)
 
