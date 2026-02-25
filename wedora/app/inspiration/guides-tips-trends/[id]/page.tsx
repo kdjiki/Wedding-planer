@@ -5,12 +5,14 @@ import {
   FEATURED_GUIDE,
   GUIDE_ARTICLES,
   REAL_WEDDING_STORIES,
+  type GuideArticle,
   type RealWeddingStory,
 } from "../../_data/guides-and-stories"
 import { BackButton } from "@/app/_components/back-button"
 import { db } from "@/db"
-import { realWeddingStories } from "@/db/schema"
+import { guideArticles, realWeddingStories } from "@/db/schema"
 import { eq } from "drizzle-orm"
+import { supabase } from "@/lib/supabase"
 
 export default async function GuideOrStoryPage({
   params,
@@ -19,9 +21,55 @@ export default async function GuideOrStoryPage({
 }) {
   const { id } = await params
 
-  // Guides ostaju iz static _data
+  // Try to find guide article in local DB first, then Supabase, then static data
+  let guideFromDb: (GuideArticle & { readTime?: number | null }) | undefined
+  try {
+    const row = await db.query.guideArticles.findFirst({
+      where: eq(guideArticles.id, id),
+    })
+    if (row) {
+      guideFromDb = {
+        id: row.id,
+        tag: row.tag as GuideArticle["tag"],
+        category: row.category,
+        title: row.title,
+        description: row.description,
+        readTime: row.readTime,
+        image: row.image,
+      }
+    }
+  } catch {
+    // ignore db errors, continue to Supabase
+  }
+
+  // If not found in local DB, try Supabase (user-created posts)
+  let guideFromSupabase: GuideArticle | undefined
+  if (!guideFromDb) {
+    try {
+      const { data, error } = await supabase
+        .from("guide_articles")
+        .select("id, tag, category, title, description, image")
+        .eq("id", id)
+        .single()
+
+      if (data && !error) {
+        guideFromSupabase = {
+          id: data.id as string,
+          tag: data.tag as GuideArticle["tag"],
+          category: data.category as string,
+          title: data.title as string,
+          description: data.description as string,
+          readTime: 5,
+          image: data.image as string,
+        }
+      }
+    } catch {
+      // Supabase error, continue to static data
+    }
+  }
+
   const allGuides = [FEATURED_GUIDE, ...GUIDE_ARTICLES]
-  const guide = allGuides.find((g) => g.id === id)
+  const guide = guideFromDb || guideFromSupabase || allGuides.find((g) => g.id === id)
 
   // Pokušaj prvo naći real wedding u bazi, pa fallback na static _data
   let storyFromDb: Awaited<ReturnType<typeof db.query.realWeddingStories.findFirst>> = undefined
