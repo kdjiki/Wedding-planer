@@ -80,13 +80,25 @@ This implementation ensures a clear separation between core application data (ma
 
 This section shows the app’s performance **on desktop and mobile devices**, with **reports generated using PageSpeed Insights** to highlight responsiveness and usability across platforms.
 
+## Desktop Report
+
+![PageSpeed Desktop Report](./Izvjestaj Desktop.png)
+
+[Download Desktop PDF Report](./PageSpeed Insights Desktop.pdf)
+
+---
+
+## Mobile Report
+
+![PageSpeed Mobile Report](./Izvjestaj Mobitel.png)
+
+[Download Mobile PDF Report](./PageSpeed Insights Mobile.pdf)
+
 # Conclusion
 
 **Wedora** is a user-centered platform designed to simplify wedding planning by combining service exploration, content sharing, and personalized organization in one place. Through iterative design, persona development, prototyping, and implementation using **Next.js, React, Supabase, Drizzle, and a headless CMS,** the project evolved into a functional and scalable web application.
 
 The integration of secure authentication, structured database management, and flexible content handling ensures both technical robustness and maintainability. Clear navigation, focused information architecture, and responsive design contribute to an intuitive and accessible user experience.
-
-izvjestaji
 
 ## Future Improvements
 
