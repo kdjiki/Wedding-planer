@@ -58,20 +58,12 @@ const weddingServicePages: Page[] = [
 
 const myAccountPages: Page[] = [
     { 
-        title: "Profile", 
+        title: "Profile Info", 
         path: "/my-account/profile" 
     },    
     { 
-        title: "My bookings", 
-        path: "/my-account/my-bookings" 
-    },
-    { 
-        title: "Budget Planner", 
-        path: "/my-account/budget-planner"
-    },
-    { 
-        title: "Notes", 
-        path: "/my-account/notes" 
+        title: "My Favorites", 
+        path: "/my-account/my-favorites" 
     },
 ];
 

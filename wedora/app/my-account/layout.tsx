@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"; // Uvezi useRouter za preusmjeravanje
 import { supabase } from "@/lib/supabase";
 
-import { SubNavigation } from "../_components/subnavigation";
+import { AccountTabs } from "./_components/account-tabs";
 import { myAccountPages } from "../navigationData";
 
 export default function MyAccountLayout({
@@ -61,10 +61,16 @@ export default function MyAccountLayout({
 
   return (
     <>
-      <SubNavigation pages={myAccountPages} />
-      <main className="min-h-screen pt-4">
-        {children}
-      </main>
+      <div className="pt-16">
+        <AccountTabs
+          tabs={myAccountPages.map((p) => ({
+            title: p.title,
+            path: p.path,
+            icon: p.path.includes("my-favorites") ? "favorites" : "profile",
+          }))}
+        />
+        <main className="min-h-screen">{children}</main>
+      </div>
     </>
   );
 }
