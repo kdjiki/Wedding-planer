@@ -1,4 +1,4 @@
-import { db } from "./index"
+import { db } from "./index";
 import {
   serviceListings,
   serviceTags,
@@ -6,20 +6,19 @@ import {
   weddingIdeas,
   guideArticles,
   realWeddingStories,
-} from "./schema"
-import { WEDDING_IDEAS } from "@/app/inspiration/_data/wedding-ideas"
+} from "./schema";
+import { WEDDING_IDEAS } from "@/app/inspiration/_data/wedding-ideas";
 import {
   FEATURED_GUIDE,
   GUIDE_ARTICLES,
   REAL_WEDDING_STORIES,
-} from "@/app/inspiration/_data/guides-and-stories"
+} from "@/app/inspiration/_data/guides-and-stories";
 
-const BASE_URL =
-  "https://sxutxqfwyxzlgsnvonvr.supabase.co/storage/v1/object/public/services"
+const BASE_URL = "https://sxutxqfwyxzlgsnvonvr.supabase.co/storage/v1/object/public/services";
 
 async function seed() {
   try {
-    console.log("🌱 Seeding database...")
+    console.log("🌱 Seeding database...");
 
     // 1️⃣ Insert service listings
     const insertedListings = await db
@@ -117,7 +116,7 @@ async function seed() {
         },
       ])
       .onConflictDoNothing()
-      .returning({ id: serviceListings.id })
+      .returning({ id: serviceListings.id });
 
     // 2️⃣ Insert tags
     const tagsMap = [
@@ -131,98 +130,81 @@ async function seed() {
       ["Beach", "Outdoor", "Up to 200 guests"],
       ["Candid", "Photojournalistic", "Same-day edits"],
       ["Buffet", "Variety of Cuisines", "Budget-friendly"],
-    ]
+    ];
 
-    for (let i = 0; i < insertedListings.length; i++) {
-      const listingId = insertedListings[i].id
-      const tags = tagsMap[i]
-
-      for (const tag of tags) {
-        await db.insert(serviceTags).values({
-          listingId,
-          tag,
-        }).onConflictDoNothing()
+    if (insertedListings.length > 0) {
+      for (let i = 0; i < insertedListings.length; i++) {
+        const listingId = insertedListings[i].id;
+        const tags = tagsMap[i];
+        for (const tag of tags) {
+          await db.insert(serviceTags).values({ listingId, tag }).onConflictDoNothing();
+        }
       }
     }
 
     // 3️⃣ Insert bookings
     const datesMap = [
-      ["2026-09-15", "2026-10-20"],
-      ["2026-11-05", "2026-12-15"],
-      ["2026-08-10", "2026-09-25"],
-      ["2026-07-15", "2026-08-30"],
-      ["2026-10-01", "2026-11-15"],
-      ["2026-09-20", "2026-10-30"],
-      ["2026-08-01", "2026-09-15"],
-      ["2026-07-20", "2026-08-25"],
-      ["2026-09-10", "2026-10-20"],
+      ["2026-09-15", "2026-10-20"], ["2026-11-05", "2026-12-15"], ["2026-08-10", "2026-09-25"],
+      ["2026-07-15", "2026-08-30"], ["2026-10-01", "2026-11-15"], ["2026-09-20", "2026-10-30"],
+      ["2026-08-01", "2026-09-15"], ["2026-07-20", "2026-08-25"], ["2026-09-10", "2026-10-20"],
       ["2026-08-15", "2026-09-30"],
-    ]
+    ];
 
-    for (let i = 0; i < insertedListings.length; i++) {
-      for (const date of datesMap[i]) {
-        await db.insert(bookings).values({
-          serviceId: insertedListings[i].id,
-          bookedDate: new Date(date),
-        }).onConflictDoNothing()
+    if (insertedListings.length > 0) {
+      for (let i = 0; i < insertedListings.length; i++) {
+        for (const date of datesMap[i]) {
+          await db.insert(bookings).values({
+            serviceId: insertedListings[i].id,
+            bookedDate: new Date(date),
+          }).onConflictDoNothing();
+        }
       }
     }
 
     // 4️⃣ Insert wedding ideas
-    await db
-      .insert(weddingIdeas)
-      .values(
-        WEDDING_IDEAS.map((idea) => ({
-          id: idea.id,
-          title: idea.title,
-          description: idea.description,
-          image: idea.image,
-          category: idea.category,
-        }))
-      )
-      .onConflictDoNothing()
+    await db.insert(weddingIdeas).values(
+      WEDDING_IDEAS.map((idea) => ({
+        id: idea.id,
+        title: idea.title,
+        description: idea.description,
+        image: idea.image,
+        category: idea.category,
+      }))
+    ).onConflictDoNothing();
 
-    // 5️⃣ Insert guide articles (featured + regular)
-    await db
-      .insert(guideArticles)
-      .values(
-        [FEATURED_GUIDE, ...GUIDE_ARTICLES].map((article) => ({
-          id: article.id,
-          tag: article.tag,
-          category: article.category,
-          title: article.title,
-          description: article.description,
-          readTime: article.readTime,
-          image: article.image,
-        }))
-      )
-      .onConflictDoNothing()
+    // 5️⃣ Insert guide articles
+    await db.insert(guideArticles).values(
+      [FEATURED_GUIDE, ...GUIDE_ARTICLES].map((article) => ({
+        id: article.id,
+        tag: article.tag,
+        category: article.category,
+        title: article.title,
+        description: article.description,
+        readTime: article.readTime,
+        image: article.image,
+      }))
+    ).onConflictDoNothing();
 
     // 6️⃣ Insert real wedding stories
-    await db
-      .insert(realWeddingStories)
-      .values(
-        REAL_WEDDING_STORIES.map((story) => ({
-          id: story.id,
-          tag: story.tag,
-          couple: story.couple,
-          location: story.location,
-          date: story.id === "sarah-michael-napa-valley"
-              ? new Date("2025-06-01")
-              : new Date("2025-09-01"),
-          guests: story.guests,
-          description: story.description,
-          image: story.image,
-        }))
-      )
-      .onConflictDoNothing()
+    await db.insert(realWeddingStories).values(
+      REAL_WEDDING_STORIES.map((story) => ({
+        id: story.id,
+        tag: story.tag,
+        couple: story.couple,
+        location: story.location,
+        date: story.id === "sarah-michael-napa-valley" ? new Date("2025-06-01") : new Date("2025-09-01"),
+        guests: story.guests,
+        description: story.description,
+        image: story.image,
+      }))
+    ).onConflictDoNothing();
 
-    console.log("✅ Database seeded successfully!")
-    process.exit(0)
+    console.log("✅ Database seeded successfully!");
+    process.exit(0);
   } catch (err) {
-    console.error("❌ Seeding failed:", err)
-    process.exit(1)
+    console.error("❌ Seeding failed:", err);
+    process.exit(1);
   }
 }
 
-seed()
+seed();
