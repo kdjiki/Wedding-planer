@@ -6,6 +6,7 @@ import { RealWeddingCard } from "../_components/real-wedding-card";
 import { CtaSection } from "@/app/_components/cta-section";
 import { db } from "@/db";
 import { realWeddingStories } from "@/db/schema";
+import { supabase } from "@/lib/supabase";
 import {
   FEATURED_GUIDE,
   GUIDE_ARTICLES,
@@ -13,17 +14,77 @@ import {
   type GuideArticle,
   type RealWeddingStory,
 } from "../_data/guides-and-stories";
+import { MyPostsPanel } from "../_components/my-posts-panel";
+
+// Uvijek dohvaćaj svježe podatke iz baze (postovi iz guide_articles)
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function GuidesTipsTrendsPage() {
-  let storiesFromDb: { id: string; tag: string; couple: string; location: string; date: Date; guests: number; description: string; image: string }[] = [];
+  let storiesFromDb: {
+    id: string
+    tag: string
+    couple: string
+    location: string
+    date: Date
+    guests: number
+    description: string
+    image: string
+  }[] = []
+  let guidesFromDb: {
+    id: string
+    tag: string
+    category: string
+    title: string
+    description: string
+    image: string
+    userId?: string | null
+  }[] = []
+
   try {
-    storiesFromDb = await db.select().from(realWeddingStories);
+    storiesFromDb = await db.select().from(realWeddingStories)
   } catch {
     // Fallback when DB unavailable (e.g. connection pool limit)
   }
 
-  const featuredGuide: GuideArticle = FEATURED_GUIDE;
-  const guideArticlesMapped: GuideArticle[] = GUIDE_ARTICLES;
+  try {
+    const { data, error } = await supabase
+      .from("guide_articles")
+      .select("id, tag, category, title, description, image, user_id")
+
+    if (error) throw error
+    guidesFromDb = (data ?? []).map((row) => ({
+      id: row.id as string,
+      tag: row.tag as string,
+      category: row.category as string,
+      title: row.title as string,
+      description: row.description as string,
+      image: row.image as string,
+      userId: (row as { user_id?: string | null }).user_id ?? null,
+    }))
+  } catch {
+    // Fallback to static data when DB unavailable
+  }
+
+  const guidesSource =
+    guidesFromDb.length > 0
+      ? guidesFromDb.map((g) => ({
+          id: g.id,
+          tag: g.tag as GuideArticle["tag"],
+          category: g.category,
+          title: g.title,
+          description: g.description,
+          readTime: 5,
+          image: g.image,
+        }))
+      : GUIDE_ARTICLES
+
+  const featuredGuide: GuideArticle =
+    guidesSource.find((g) => g.tag === "Trending") || FEATURED_GUIDE;
+
+  const guideArticlesMapped: GuideArticle[] = guidesSource.filter(
+    (g) => g.id !== featuredGuide.id
+  );
 
   const realWeddingStoriesMapped: RealWeddingStory[] =
     storiesFromDb.length === 0
@@ -41,7 +102,6 @@ export default async function GuidesTipsTrendsPage() {
           description: story.description,
           image: story.image,
         }));
-
 
   return (
     <div className="pt-16">
@@ -98,7 +158,8 @@ export default async function GuidesTipsTrendsPage() {
           </section>
         )}
       </div>
-      <CtaSection/>
+      <CtaSection />
+      <MyPostsPanel />
     </div>
   );
 }
