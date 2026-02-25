@@ -6,7 +6,7 @@ export function GuideSmallCard({ article }: { article: GuideArticle }) {
   return (
     <Link
       href={`/inspiration/guides-tips-trends/${article.id}`}
-      className="group block bg-white dark:bg-[#1E1E1E] rounded-xl overflow-hidden border border-[#E0E0E0] dark:border-[#2D2D2D] hover:border-[#FF69B4] hover:shadow-lg hover:opacity-95 transition-all"
+      className="group block bg-white dark:bg-[#1E1E1E] rounded-xl overflow-hidden border border-[#E0E0E0] dark:border-[#2D2D2D] hover:border-[#FF69B4] hover:shadow-lg hover:opacity-95 transition-all focus:outline-none focus:ring-2 focus:ring-[#FF69B4] focus:ring-offset-2 focus:ring-offset-[#F5F5F5] dark:focus:ring-offset-[#121212]"
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image

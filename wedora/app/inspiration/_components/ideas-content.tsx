@@ -89,30 +89,14 @@ export function IdeasContent({ initialIdeas }: { initialIdeas: WeddingIdea[] }) 
         </div>
       </div>
 
-      {/* Image card grid – varied sizes */}
+      {/* Image card grid */}
       {filteredIdeas.length > 0 ? (
         <>
-          <div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
-            style={{ gridAutoRows: "minmax(160px, auto)" }}
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {visibleIdeas.map((idea, index) => {
-              const size =
-                index % 8 === 0
-                  ? "wide"
-                  : index % 8 === 4
-                    ? "tall"
-                    : "default"
-              const gridClass =
-                size === "wide"
-                  ? "sm:col-span-2"
-                  : size === "tall"
-                    ? "sm:row-span-2 h-full min-h-0"
-                    : ""
+              const size = index % 5 === 3 ? "tall" : "default"
               return (
-                <div key={idea.id} className={gridClass}>
-                  <IdeaCard idea={idea} size={size} />
-                </div>
+                <IdeaCard key={idea.id} idea={idea} size={size} />
               )
             })}
           </div>

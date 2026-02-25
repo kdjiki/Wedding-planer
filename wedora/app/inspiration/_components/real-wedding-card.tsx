@@ -7,7 +7,7 @@ export function RealWeddingCard({ story }: { story: RealWeddingStory }) {
   return (
     <Link
       href={`/inspiration/guides-tips-trends/${story.id}`}
-      className="group flex flex-col sm:flex-row bg-white dark:bg-[#1E1E1E] rounded-xl overflow-hidden border border-[#E0E0E0] dark:border-[#2D2D2D] hover:border-[#FF69B4] hover:shadow-lg hover:opacity-95 transition-all"
+      className="group flex flex-col sm:flex-row bg-white dark:bg-[#1E1E1E] rounded-xl overflow-hidden border border-[#E0E0E0] dark:border-[#2D2D2D] hover:border-[#FF69B4] hover:shadow-lg hover:opacity-95 transition-all focus:outline-none focus:ring-2 focus:ring-[#FF69B4] focus:ring-offset-2 focus:ring-offset-[#F5F5F5] dark:focus:ring-offset-[#121212]"
     >
       <div className="relative w-full sm:w-[42%] sm:min-w-[240px] aspect-[4/3] sm:aspect-auto sm:min-h-[240px]">
         <Image
