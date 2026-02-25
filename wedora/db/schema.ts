@@ -86,16 +86,16 @@ export const favorites = pgTable(
 
 /* WEDDING IDEAS */
 
-export const weddingIdeas = pgTable("wedding_ideas", {
+/* export const weddingIdeas = pgTable("wedding_ideas", {
   id: text("id").primaryKey(),
   title: text("title").notNull(),
   description: text("description").notNull(),
   image: text("image").notNull(),
   category: text("category").notNull(),
 })
-
+*/
 /*GUIDE ARTICLES  */
-
+/*
 export const guideArticles = pgTable("guide_articles", {
   id: text("id").primaryKey(),
   tag: text("tag").notNull(),
@@ -105,9 +105,9 @@ export const guideArticles = pgTable("guide_articles", {
   readTime: integer("read_time").notNull(),
   image: text("image").notNull(),
 })
-
+*/
 /* REAL WEDDING STORIES */
-
+/*
 export const realWeddingStories = pgTable("real_wedding_stories", {
   id: text("id").primaryKey(),
   tag: text("tag").notNull(),
@@ -118,7 +118,7 @@ export const realWeddingStories = pgTable("real_wedding_stories", {
   description: text("description").notNull(),
   image: text("image").notNull(),
 })
-
+*/
 export const servicesRelations = relations(serviceListings, ({ many }) => ({
   bookings: many(bookings),
   favorites: many(favorites),
