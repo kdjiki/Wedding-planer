@@ -13,10 +13,10 @@ const mainPages: Page[] = [
     title: "Wedding service",
     path: "/wedding-service",
   },
-  {
-    title: "Vendor dashboard",
-    path: "/vendor-dashboard",
-  },
+//   {
+//     title: "Vendor dashboard",
+//     path: "/vendor-dashboard",
+//   },
   {
     title: "Inspiration",
     path: "/inspiration",

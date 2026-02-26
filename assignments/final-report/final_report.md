@@ -64,7 +64,7 @@ The desktop and mobile prototypes are available in [**Assignment 4**](https://gi
 
 ## Implementation and Key Features
 
-In this phase, we transformed the prototypes into a fully functional web application using **Next.js** and **React** for the frontend, **Supabase** for authentication and backend services, and Drizzle as the ORM for database management. In addition, a **headless CMS** was integrated to enable structured creation and management of blog content independently from the core application logic.
+In this phase, we transformed the prototypes into a fully functional web application using **Next.js** and **React** for the frontend, **Supabase** for authentication and backend services, and Drizzle as the ORM for database management. In addition, a **headless CMS (Sanity)** was integrated to enable structured creation and management of blog content independently from the core application logic.
 
 The main features currently implemented include:
 
@@ -74,7 +74,7 @@ The main features currently implemented include:
 4. **Blog System** – All users can read blog posts, while authenticated users can create and publish new posts via the headless CMS.
 5. **User Authentication** – Secure registration and login handled through Supabase.
 
-This implementation ensures a clear separation between core application data (managed via Supabase and Drizzle) and content management (handled through the CMS), resulting in a scalable and maintainable architecture.
+This implementation ensures a clear separation between core application data (managed via Supabase and Drizzle) and content management (FeatureCard handled through the CMS), resulting in a scalable and maintainable architecture.
 
 # Application Performance
 
@@ -96,7 +96,7 @@ This section shows the app’s performance **on desktop and mobile devices**, wi
 
 # Conclusion
 
-**Wedora** is a user-centered platform designed to simplify wedding planning by combining service exploration, content sharing, and personalized organization in one place. Through iterative design, persona development, prototyping, and implementation using **Next.js, React, Supabase, Drizzle, and a headless CMS,** the project evolved into a functional and scalable web application.
+**Wedora** is a user-centered platform designed to simplify wedding planning by combining service exploration, content sharing, and personalized organization in one place. Through iterative design, persona development, prototyping, and implementation using **Next.js, React, Supabase, Drizzle, and a headless CMS (Sanity),** the project evolved into a functional and scalable web application.
 
 The integration of secure authentication, structured database management, and flexible content handling ensures both technical robustness and maintainability. Clear navigation, focused information architecture, and responsive design contribute to an intuitive and accessible user experience.
 
