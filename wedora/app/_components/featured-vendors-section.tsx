@@ -2,9 +2,10 @@ import { db } from "@/db"
 import { serviceListings } from "@/db/schema"
 import { desc } from "drizzle-orm"
 import {FeaturedVendorsSectionClient} from "./featured-vendors-section-client"
+import { useEffect } from "react"
 
 export async function FeaturedVendorsSection() {
-  // fetch top-rated vendore iz baze (limit 4)
+  // fetch top-rated vendore from base (limit 4)
   const vendors = await db
     .select()
     .from(serviceListings)
